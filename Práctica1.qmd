@@ -1,0 +1,11 @@
+---
+title: "Práctica 1"
+author: "Carla Martínez, Patricia Mateu, Margalida Verd"
+format: html
+editor: visual
+---
+
+```{r}
+library("palmerpenguins")
+print(penguins, width = 50)
+```
