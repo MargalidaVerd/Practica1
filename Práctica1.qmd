@@ -5,7 +5,9 @@ format: html
 editor: visual
 ---
 
+Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla la estructura del dataframe.
+
 ```{r}
 library("palmerpenguins")
-print(penguins, width = 50)
+str(penguins)
 ```
