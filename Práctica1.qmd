@@ -5,9 +5,17 @@ format: html
 editor: visual
 ---
 
-Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla la estructura del dataframe.
+Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.
 
 ```{r}
 library("palmerpenguins")
+head(penguins,10)
+```
+
+Veamos su estructura:
+
+```{r}
 str(penguins)
 ```
+
+Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes.
