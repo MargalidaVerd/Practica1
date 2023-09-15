@@ -7,7 +7,7 @@ editor: visual
 
 Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.
 
-```{r, echo=FALSE}
+```{r}
 library("palmerpenguins")
 head(penguins,10)
 ```
@@ -26,13 +26,24 @@ Finalmente, tenemos tres últimas variables de tipo *integer*: `flipper_length_m
 
 Observamos tambien que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores. Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.
 
-```{r, echo = FALSE}
+```{r}
 pinguinos = na.omit(penguins)
 ```
 
-Una vez hemos limpiado los datos, empezamos con el análisis descriptivo. 
+Una vez hemos limpiado los datos, empezamos con el análisis descriptivo.
 
-```{r, echo=FALSE}
+## Datos demográficos
+
+Empecemos por las frecuencias relativas de cada especie de pingüino:
+
+```{r}
+table(pinguinos$species)
+```
+
+Con cierta diferencia, la especie más poblada es la *Adelie*, seguida de *Gentoo* y, finalmente, *Chinstrap*, que es la menos poblada. Veamoslo gráficamente:
+
+```{r}
+
 library(ggplot2)
 
 data = data.frame(group = c("Adelie", "Gentoo", "Chinstrap"), value = c(146, 119, 68))
@@ -44,12 +55,27 @@ ggplot(data, aes(x = "", y = value, fill = group)) + geom_col() +
 
 ```
 
+Tambien es interesante estudiar la población por islas. A continuación lo vemos:
+
+```{r}
+table(pinguinos$island)
+```
+
+Como podemos ver, la isla más poblada es la Biscoe, seguida de Dream y, por último, ya más alejada en cuanto a valores, la isla Torgersen. Analicemos ahora la población de cada isla por especies; es decir, nos interesa saber la cantidad de pingüinos de cada especie en cada isla. Para ello utilizamos:
 
 
-
-
-
-
+```{r}
+adelie = pinguinos[which(pinguinos$species == "Adelie"),]
+table(adelie$island)
+```
+```{r}
+gentoo = pinguinos[which(pinguinos$species == "Gentoo"),]
+table(gentoo$island)
+```
+```{r}
+chinstrap = pinguinos[which(pinguinos$species == "Chinstrap"),]
+table(chinstrap$island)
+```
 
 
 
