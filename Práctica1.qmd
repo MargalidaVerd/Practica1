@@ -7,7 +7,7 @@ editor: visual
 
 Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.
 
-```{r}
+```{r, echo=FALSE}
 library("palmerpenguins")
 head(penguins,10)
 ```
@@ -18,4 +18,44 @@ Veamos su estructura:
 str(penguins)
 ```
 
-Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes.
+Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo *factor*: `Species`, que puede tomar tres valores ("Adelie", "Chinstrap", "Gentoo"); la variable `Island`asigna la isla de procedencia de cada individuo y toma tres valores también, que son "Biscoe", "Dream" y "Torgersen"; finalmente los niveles de la variable `sex` son "female" y "male". 
+
+Tambien encontramos dos variables del tipo *numérico*, que son `bill_length_mm`, que corresponde a la longitud del pico de cada pingüino, en milímetros , y `bill_depth_mm`, que corresponde al grosor del pico, también en milímetros.
+
+Finalmente, tenemos tres últimas variables de tipo *integer*: `flipper_length_mm`, que corresponde a la longitud de las aletas de cada pingüino, en milímetros; `body_mass_g`, que recoge la masa corporal en gramos de cada individuo; `year`, ???????????????????
+
+Observamos tambien que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores. Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.
+
+```{r, echo = FALSE}
+pinguinos = na.omit(penguins)
+```
+
+Una vez hemos limpiado los datos, empezamos con el análisis descriptivo. 
+
+```{r, echo=FALSE}
+library(ggplot2)
+
+data = data.frame(group = c("Adelie", "Gentoo", "Chinstrap"), value = c(146, 119, 68))
+
+ggplot(data, aes(x = "", y = value, fill = group)) + geom_col() +
+  coord_polar(theta = "y") +
+  theme_void() +
+  guides(fill= guide_legend(title = ""))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

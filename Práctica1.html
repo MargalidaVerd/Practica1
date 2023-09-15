@@ -101,12 +101,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Primero instalamos el paquete “palmerpenguins” y mostramos por pantalla la estructura del dataframe.</p>
+<p>Primero instalamos el paquete “palmerpenguins” y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"palmerpenguins"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'palmerpenguins' was built under R version 4.2.3</code></pre>
 </div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           39.1          18.7               181        3750
+ 2 Adelie  Torgersen           39.5          17.4               186        3800
+ 3 Adelie  Torgersen           40.3          18                 195        3250
+ 4 Adelie  Torgersen           NA            NA                  NA          NA
+ 5 Adelie  Torgersen           36.7          19.3               193        3450
+ 6 Adelie  Torgersen           39.3          20.6               190        3650
+ 7 Adelie  Torgersen           38.9          17.8               181        3625
+ 8 Adelie  Torgersen           39.2          19.6               195        4675
+ 9 Adelie  Torgersen           34.1          18.1               193        3475
+10 Adelie  Torgersen           42            20.2               190        4250
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
+</div>
+</div>
+<p>Veamos su estructura:</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
@@ -118,6 +136,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
  $ sex              : Factor w/ 2 levels "female","male": 2 1 1 NA 1 2 1 2 NA NA ...
  $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
+</div>
+</div>
+<p>Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo <em>factor</em>: <code>Species</code>, que puede tomar tres valores (“Adelie”, “Chinstrap”, “Gentoo”); la variable <code>Island</code>asigna la isla de procedencia de cada individuo y toma tres valores también, que son “Biscoe”, “Dream” y “Torgersen”; finalmente los niveles de la variable <code>sex</code> son “female” y “male”.</p>
+<p>Tambien encontramos dos variables del tipo <em>numérico</em>, que son <code>bill_length_mm</code>, que corresponde a la longitud del pico de cada pingüino, en milímetros , y <code>bill_depth_mm</code>, que corresponde al grosor del pico, también en milímetros.</p>
+<p>Finalmente, tenemos tres últimas variables de tipo <em>integer</em>: <code>flipper_length_mm</code>, que corresponde a la longitud de las aletas de cada pingüino, en milímetros; <code>body_mass_g</code>, que recoge la masa corporal en gramos de cada individuo; <code>year</code>, ???????????????????</p>
+<p>Observamos tambien que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores. Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.</p>
+<p>Una vez hemos limpiado los datos, empezamos con el análisis descriptivo.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.2.3</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="Práctica1_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 
