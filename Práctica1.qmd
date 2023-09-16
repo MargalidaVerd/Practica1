@@ -8,7 +8,7 @@ editor: visual
 Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.
 
 ```{r}
-install.packages("palmerpenguins")
+#install.packages("palmerpenguins")
 library("palmerpenguins")
 head(penguins,344)
 ```
@@ -19,17 +19,85 @@ Veamos su estructura:
 str(penguins)
 ```
 
-Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes.
+Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo *factor*: `Species`, que puede tomar tres valores ("Adelie", "Chinstrap", "Gentoo"); la variable `Island`asigna la isla de procedencia de cada individuo y toma tres valores también, que son "Biscoe", "Dream" y "Torgersen"; finalmente los niveles de la variable `sex` son "female" y "male". 
+
+Tambien encontramos dos variables del tipo *numérico*, que son `bill_length_mm`, que corresponde a la longitud del pico de cada pingüino, en milímetros , y `bill_depth_mm`, que corresponde al grosor del pico, también en milímetros.
+
+Finalmente, tenemos tres últimas variables de tipo *integer*: `flipper_length_mm`, que corresponde a la longitud de las aletas de cada pingüino, en milímetros; `body_mass_g`, que recoge la masa corporal en gramos de cada individuo; `year`, que se atubuye al año de estudio de cada pingüino (2007,2008 o 2009).
+
+Observamos también que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores. Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.
 
 ```{r}
-install.packages("ggplot2")
+pinguinos = na.omit(penguins)
 ```
 
+Una vez hemos limpiado los datos, empezamos con el análisis descriptivo.
+
+## Datos demográficos
+
+Empecemos por las frecuencias relativas de cada especie de pingüino:
+
 ```{r}
+table(pinguinos$species)
+```
+
+Con cierta diferencia, la especie más poblada es la *Adelie*, seguida de *Gentoo* y, finalmente, *Chinstrap*, que es la menos poblada. Veámoslo gráficamente:
+
+```{r}
+
 library(ggplot2)
-boxplot(penguins$bill_length_mm, penguins$bill_depth_mm,
-        main = "Ancho y largo de los picos",
-        names = c("Largo del pico","Ancho del pico"))
-# Para dibujar una linea roja de la media del largo del pico
-abline(h = mean(penguins$bill_length_mm), col = "red")
+
+data = data.frame(group = c("Adelie", "Gentoo", "Chinstrap"), value = c(146, 119, 68))
+
+ggplot(data, aes(x = "", y = value, fill = group)) + geom_col() +
+  coord_polar(theta = "y") +
+  theme_void() +
+  guides(fill= guide_legend(title = ""))
+
 ```
+
+También es interesante estudiar la población por islas. A continuación lo vemos:
+
+```{r}
+table(pinguinos$island)
+```
+
+Como podemos ver, la isla más poblada es la Biscoe, seguida de Dream y, por último, ya más alejada en cuanto a valores, la isla Torgersen. Analicemos ahora la población de cada isla por especies; es decir, nos interesa saber la cantidad de pingüinos de cada especie en cada isla. Para ello utilizamos:
+
+```{r}
+adelie = pinguinos[which(pinguinos$species == "Adelie"),]
+table(adelie$island)
+```
+
+
+```{r}
+gentoo = pinguinos[which(pinguinos$species == "Gentoo"),]
+table(gentoo$island)
+```
+```{r}
+chinstrap = pinguinos[which(pinguinos$species == "Chinstrap"),]
+table(chinstrap$island)
+```
+
+
+## Estudio por especie
+
+Vamos a analizar las diferentes característcas de cada especie. Empezaremos por la especia *Adelie* que es la más poblada. Estudiaremos la media, la varianza y la desviación típica de las caracerísticas de los pingüinos:
+
+```{r}
+median(adelie$bill_length_mm) #mediana
+mean(adelie$bill_length_mm) #media
+```
+
+
+
+## Resumen especies
+Vamos a ver de manera resumida los daros recogidos anteriormente:
+```{r}
+summary(pinguinos)
+```
+
+
+
+
+>>>>>>> fafaaced80dd78c770246be002389718e3bf0bc4

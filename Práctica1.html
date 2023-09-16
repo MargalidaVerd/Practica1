@@ -136,9 +136,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: package 'palmerpenguins' was built under R version 4.2.3</code></pre>
 </div>
+<<<<<<< HEAD
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins,<span class="dv">344</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 344 × 8
+=======
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 8
+>>>>>>> fafaaced80dd78c770246be002389718e3bf0bc4
    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
    &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
  1 Adelie  Torgersen           39.1          18.7               181        3750
@@ -151,7 +157,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  8 Adelie  Torgersen           39.2          19.6               195        4675
  9 Adelie  Torgersen           34.1          18.1               193        3475
 10 Adelie  Torgersen           42            20.2               190        4250
+<<<<<<< HEAD
 # ℹ 334 more rows
+=======
+>>>>>>> fafaaced80dd78c770246be002389718e3bf0bc4
 # ℹ 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;</code></pre>
 </div>
 </div>
@@ -170,10 +179,86 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
 </div>
 </div>
+<<<<<<< HEAD
 <p>Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes.</p>
 <div class="cell">
 
 </div>
+=======
+<p>Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo <em>factor</em>: <code>Species</code>, que puede tomar tres valores (“Adelie”, “Chinstrap”, “Gentoo”); la variable <code>Island</code>asigna la isla de procedencia de cada individuo y toma tres valores también, que son “Biscoe”, “Dream” y “Torgersen”; finalmente los niveles de la variable <code>sex</code> son “female” y “male”.</p>
+<p>Tambien encontramos dos variables del tipo <em>numérico</em>, que son <code>bill_length_mm</code>, que corresponde a la longitud del pico de cada pingüino, en milímetros , y <code>bill_depth_mm</code>, que corresponde al grosor del pico, también en milímetros.</p>
+<p>Finalmente, tenemos tres últimas variables de tipo <em>integer</em>: <code>flipper_length_mm</code>, que corresponde a la longitud de las aletas de cada pingüino, en milímetros; <code>body_mass_g</code>, que recoge la masa corporal en gramos de cada individuo; <code>year</code>, ???????????????????</p>
+<p>Observamos tambien que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores. Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pinguinos <span class="ot">=</span> <span class="fu">na.omit</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Una vez hemos limpiado los datos, empezamos con el análisis descriptivo.</p>
+<section id="datos-demográficos" class="level2">
+<h2 class="anchored" data-anchor-id="datos-demográficos">Datos demográficos</h2>
+<p>Empecemos por las frecuencias relativas de cada especie de pingüino:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pinguinos<span class="sc">$</span>species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   Adelie Chinstrap    Gentoo 
+      146        68       119 </code></pre>
+</div>
+</div>
+<p>Con cierta diferencia, la especie más poblada es la <em>Adelie</em>, seguida de <em>Gentoo</em> y, finalmente, <em>Chinstrap</em>, que es la menos poblada. Veamoslo gráficamente:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">c</span>(<span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span>, <span class="st">"Chinstrap"</span>), <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">146</span>, <span class="dv">119</span>, <span class="dv">68</span>))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> value, <span class="at">fill =</span> group)) <span class="sc">+</span> <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill=</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">""</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Práctica1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Tambien es interesante estudiar la población por islas. A continuación lo vemos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pinguinos<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   Biscoe     Dream Torgersen 
+      163       123        47 </code></pre>
+</div>
+</div>
+<p>Como podemos ver, la isla más poblada es la Biscoe, seguida de Dream y, por último, ya más alejada en cuanto a valores, la isla Torgersen. Analicemos ahora la población de cada isla por especies; es decir, nos interesa saber la cantidad de pingüinos de cada especie en cada isla. Para ello utilizamos:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>adelie <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Adelie"</span>),]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(adelie<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   Biscoe     Dream Torgersen 
+       44        55        47 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>gentoo <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Gentoo"</span>),]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(gentoo<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   Biscoe     Dream Torgersen 
+      119         0         0 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>chinstrap <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Chinstrap"</span>),]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(chinstrap<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+   Biscoe     Dream Torgersen 
+        0        68         0 </code></pre>
+</div>
+</div>
+</section>
+>>>>>>> fafaaced80dd78c770246be002389718e3bf0bc4
 
 </main>
 <!-- /main column -->
