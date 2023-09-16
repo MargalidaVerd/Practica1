@@ -8,8 +8,9 @@ editor: visual
 Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.
 
 ```{r}
+install.packages("palmerpenguins")
 library("palmerpenguins")
-head(penguins,10)
+head(penguins,344)
 ```
 
 Veamos su estructura:
@@ -19,3 +20,16 @@ str(penguins)
 ```
 
 Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes.
+
+```{r}
+install.packages("ggplot2")
+```
+
+```{r}
+library(ggplot2)
+boxplot(penguins$bill_length_mm, penguins$bill_depth_mm,
+        main = "Ancho y largo de los picos",
+        names = c("Largo del pico","Ancho del pico"))
+# Para dibujar una linea roja de la media del largo del pico
+abline(h = mean(penguins$bill_length_mm), col = "red")
+```
