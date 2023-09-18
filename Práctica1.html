@@ -83,7 +83,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#datos-demográficos" id="toc-datos-demográficos" class="nav-link active" data-scroll-target="#datos-demográficos">Datos demográficos</a></li>
   <li><a href="#estudio-por-especie" id="toc-estudio-por-especie" class="nav-link" data-scroll-target="#estudio-por-especie">Estudio por especie</a></li>
   <li><a href="#estudio-por-sexo" id="toc-estudio-por-sexo" class="nav-link" data-scroll-target="#estudio-por-sexo">Estudio por sexo</a></li>
-  <li><a href="#resumen-especies" id="toc-resumen-especies" class="nav-link" data-scroll-target="#resumen-especies">Resumen especies</a></li>
+  <li><a href="#estudio-por-año-de-registro" id="toc-estudio-por-año-de-registro" class="nav-link" data-scroll-target="#estudio-por-año-de-registro">Estudio por año de registro</a></li>
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">Conclusión</a></li>
   </ul>
 </nav>
 </div>
@@ -185,7 +186,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="Práctica1_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Finalmente, veamos el sexo de los individuos de la muestra.</p>
+<p>Un dato también a tener en cuenta en nuestro AED es el año de estudio de los individuos. Visualicemos el recuento:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+2007 2008 2009 
+ 103  113  117 </code></pre>
+</div>
+</div>
+<p>El tamaño de las muestras de cada año no fluctua significativamente.</p>
+<p>Finalmente, veamos el sexo de los individuos de la muestra:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -248,8 +258,21 @@ female   male
 </div>
 </div>
 </section>
-<section id="resumen-especies" class="level2">
-<h2 class="anchored" data-anchor-id="resumen-especies">Resumen especies</h2>
+<section id="estudio-por-año-de-registro" class="level2">
+<h2 class="anchored" data-anchor-id="estudio-por-año-de-registro">Estudio por año de registro</h2>
+<p>Como hemos visto antes, cada año se tomaron datos de, aproximadamente 100 pingüinos. En esta sección analizamos con detalle si existen diferencias en función del año de estudio. Empecemos con las medias, como hemos hecho ya en las dos secciones anteriores:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  year bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+1 2007       44.01942      17.41456          197.2427    4153.155
+2 2008       43.51770      16.93628          202.6991    4263.274
+3 2009       44.42821      17.16581          202.5726    4200.214</code></pre>
+</div>
+</div>
+<p>La variación que más destaca es la media de la longitud de las aletas entre el 2007 y el 2008. Así mismo, en estos mismos años, la masa corporal de los pingüinos aumentó 110 gramos con respecto el año anterior.</p>
+</section>
+<section id="conclusión" class="level2">
+<h2 class="anchored" data-anchor-id="conclusión">Conclusión</h2>
 <p>Vamos a ver de manera resumida los datos recogidos anteriormente:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -269,7 +292,6 @@ female   male
  Max.   :231       Max.   :6300                Max.   :2009  </code></pre>
 </div>
 </div>
-<p>Una parte importante a analizar también es la presencia de valores atípicos. Para ello</p>
 </section>
 
 </main>

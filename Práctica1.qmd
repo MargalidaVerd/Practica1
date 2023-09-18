@@ -70,7 +70,14 @@ ggplot(data2, aes(island, fill = species)) +
   geom_bar() + guides(fill= guide_legend(title = ""))
 ```
 
-Finalmente, veamos el sexo de los individuos de la muestra.
+Un dato también a tener en cuenta en nuestro AED es el año de estudio de los individuos. Visualicemos el recuento:
+
+```{r, echo=FALSE}
+table(pinguinos$year)
+```
+El tamaño de las muestras de cada año no fluctua significativamente.
+
+Finalmente, veamos el sexo de los individuos de la muestra:
 
 ```{r, echo=FALSE}
 
@@ -129,14 +136,26 @@ aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~
           data=pinguinos, FUN=min)
 ```
 
-## Resumen especies
+## Estudio por año de registro
+
+Como hemos visto antes, cada año se tomaron datos de, aproximadamente 100 pingüinos. En esta sección analizamos con detalle si existen diferencias en función del año de estudio. Empecemos con las medias, como hemos hecho ya en las dos secciones anteriores:
+
+```{r, echo = FALSE}
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~year,
+          data=pinguinos, FUN=mean)
+```
+
+La variación que más destaca es la media de la longitud de las aletas entre el 2007 y el 2008. Así mismo, en estos mismos años, la masa corporal de los pingüinos aumentó 110 gramos con respecto el año anterior. 
+
+
+## Conclusión
 
 Vamos a ver de manera resumida los datos recogidos anteriormente:
 
 ```{r, echo=FALSE}
 summary(pinguinos)
 ```
-Una parte importante a analizar también es la presencia de valores atípicos. Para ello
+
 
 
 
