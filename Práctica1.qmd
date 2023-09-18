@@ -1,14 +1,15 @@
 ---
 title: "Práctica 1"
-author: "Carla Martínez, Patricia Mateu, Margalida Verd"
+author: "Carla Martínez, Patricia Mateu i Margalida Verd"
 format: html
 toc: true
 editor: visual
+len: spanish
 ---
 
-Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.
+Primero instalamos el paquete `palmerpenguins` y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente:
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, echo = FALSE}
 #install.packages("palmerpenguins")
 library("palmerpenguins")
 head(penguins,10)
@@ -16,13 +17,13 @@ head(penguins,10)
 
 Veamos su estructura:
 
-```{r}
+```{r, echo = FALSE}
 str(penguins)
 ```
 
-Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo *factor*: `Species`, que puede tomar tres valores ("Adelie", "Chinstrap", "Gentoo"); la variable `Island` asigna la isla de procedencia de cada individuo y toma tres valores también, que son "Biscoe", "Dream" y "Torgersen"; finalmente los niveles de la variable `sex` son "female" y "male".
+Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo *factor*: `Species`, que puede tomar tres valores ("Adelie", "Chinstrap", "Gentoo"); la variable `Island`, que asigna la isla de procedencia de cada individuo y toma tres valores también, que son "Biscoe", "Dream" y "Torgersen"; finalmente los niveles de la variable `sex` son "female" y "male".
 
-También encontramos dos variables del tipo *numérico*, que son `bill_length_mm`, que corresponde a la longitud del pico de cada pingüino, en milímetros , y `bill_depth_mm`, que corresponde al grosor del pico, también en milímetros.
+También encontramos dos variables del tipo *numérico*, que son `bill_length_mm`, que corresponde a la longitud del pico de cada pingüino, en milímetros, y `bill_depth_mm`, que corresponde al grosor del pico, también en milímetros.
 
 Finalmente, tenemos tres últimas variables de tipo *integer*: `flipper_length_mm`, que corresponde a la longitud de las aletas de cada pingüino, en milímetros; `body_mass_g`, que recoge la masa corporal en gramos de cada individuo; `year`, que se atribuye al año de estudio de cada pingüino (2007, 2008 o 2009).
 
@@ -36,101 +37,108 @@ Una vez hemos limpiado los datos, empezamos con el análisis descriptivo.
 
 ## Datos demográficos
 
-Empecemos por las frecuencias relativas de cada especie de pingüino:
+Primero de todo, vamos a hacer un análisis de los datos básicos de la muestra, para familiarizarnos con ellos y poder estudiarlos con detalle más adelante. Empecemos por las especies de pingüinos. Recordemos que hay tres:
 
-```{r}
+-   "Adelie"
+
+-   "Chinstrap"
+
+-   "Gentoo"
+
+Veamos sus frecuencias relativas:
+
+```{r, echo=FALSE}
 table(pinguinos$species)
 ```
 
-Con cierta diferencia, la especie más poblada es la *Adelie*, seguida de *Gentoo* y, finalmente, *Chinstrap*. Veámoslo gráficamente:
-
-```{r, warning=FALSE}
-
-library(ggplot2)
-
-data = data.frame(group = c("Adelie", "Gentoo", "Chinstrap"), value = c(146, 119, 68))
-
-ggplot(data, aes(x = "", y = value, fill = group)) + geom_col() +
-  coord_polar(theta = "y") +
-  theme_void() +
-  guides(fill= guide_legend(title = ""))
-
-```
+Con cierta diferencia, la especie más poblada es la *Adelie*, seguida de *Gentoo* y, finalmente, *Chinstrap*. 
 
 También es interesante estudiar la población por islas. A continuación lo vemos:
 
-```{r}
+```{r, echo = FALSE}
 table(pinguinos$island)
 ```
 
-Como podemos ver, la isla más poblada es la de *Biscoe*, seguida de *Dream* y, por último, ya más alejada en cuanto a valores, la isla *Torgersen*. Analicemos ahora la población de cada isla por especies; es decir, nos interesa ilustrar la cantidad de pingüinos de cada especie en cada isla. Ilustramos estos resultados:
+Como podemos ver, la isla más poblada es la de *Biscoe*, seguida de *Dream* y, por último, ya más alejada en cuanto a valores, la isla *Torgersen*. 
 
-```{r}
+Analicemos ahora la población de cada isla por especies; es decir, nos interesa ilustrar la cantidad de pingüinos de cada especie en cada isla. En el siguiente gráfico vemos como la especie *Adelie* se haya en las tres islas, mientras que las otras dos solo en una de ellas.
+
+```{r, echo=FALSE, warning=FALSE}
+library(ggplot2)
 data2= pinguinos[, c(1,2)]
 ggplot(data2, aes(island, fill = species)) +
   geom_bar() + guides(fill= guide_legend(title = ""))
 ```
 
-Como vemos en el gráfico, la especie *Adelie* se haya en las tres islas, mientras que las otras dos solo en una de ellas.
+Finalmente, veamos el sexo de los individuos de la muestra.
+
+```{r, echo=FALSE}
+
+table(pinguinos$sex)
+
+```
+No notamos mucha diferencia entre machos y hembras, por lo que se podrá estudiar más adelante si existen diferencias en las características de los pingüinos en función del sexo cromosómico de estos.
 
 ## Estudio por especie
 
 Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función `aggregate()`, donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe.
 
-```{r}
+```{r, echo=FALSE}
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species, 
           data=pinguinos, FUN=mean)
 ```
 
-Como podemos observar, la especie *Chinstrap* es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie *Gentoo* tiene las aletas más largas que las otras dos especies que están bastante cerca en relación a la media. Y, por último, la especie *Gentoo* tiene el peso medio considerablemente más alto que las demás que són bastante próximas numéricamente.
+Como podemos observar, la especie *Chinstrap* es la que tiene el pico más largo y más ancho en comparación a las medias de las otras dos especies. En cambio, la especie *Gentoo* tiene las aletas más largas que las otras dos especies, que están bastante cerca en relación a la media. Y, por último, la especie *Gentoo* tiene el peso medio considerablemente más alto que las demás, que són bastante próximas numéricamente.
 
-Ahora, vamos a estudiar cada especie por separado. Empezaremos estudiando la especie *Adelie* que es la más abundante. Vamos a estudiar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.
+Ahora vamos a estudiar cada especie por separado. Empezaremos estudiando la especie *Adelie*, que es la más abundante. Vamos a mostrar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.
 
-```{r}
+```{r, echo=FALSE}
 adelie = pinguinos[which(pinguinos$species == "Adelie"),]
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~island,
           data=adelie, FUN=mean)
 ```
 
-Podemos observar que las medias de la largaria y anchura del pico son próximas numericamente. En cambio, las aletas de los pingüinos *Adelie* de la isla *Torgersen* són un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no podemos observar diferencias significativas entre el peso de los pingüinos *Adelie* en referencia a habitar una isla u otra.
+Podemos observar que las medias de la largaria y anchura del pico son próximas numéricamente. En cambio, las aletas de los pingüinos *Adelie* de la isla *Torgersen* són un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no notamos diferencias significativas entre el peso de los pingüinos *Adelie* en referencia a habitar una isla u otra.
 
 Notemos que con las especies *Chinstrap* y *Gentoo* no podemos hacer el estudio de las diferentes islas ya que sólo habitan una: la especie *Chinstrap* habita en *Dream* y la *Gentoo* en *Biscoe*.
-
 
 ## Estudio por sexo
 
 En esta sección, analizaremos las posibles diferencias entre sexos. Veámoslo de forma sencilla:
 
-```{r}
+```{r, echo= FALSE}
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
           data=pinguinos, FUN=mean)
 ```
 
-Como se aprecia en la tabla anterior, hay algunas diferencias significativas entre sexos, donde el sexo masculino tiene los valores más altos. Cabe destacar la masa corporal: mientras que la media de las hembras ronda los 3900 gramos, la de los machos supera esta cifra en casi 700 gramos. 
+Como se aprecia en la tabla anterior, hay algunas diferencias significativas entre sexos, donde el sexo masculino toma siempre los valores más altos. Cabe destacar la masa corporal: mientras que la media de las hembras ronda los 3900 gramos, la de los machos supera esta cifra en casi 700 gramos.
 
 Fijémonos ahora en los máximos de cada variable:
 
-```{r}
+```{r, echo=FALSE}
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
           data=pinguinos, FUN= max)
 ```
-La diferencia más significativa vuelve a ser la de la masa corporal, que difiere en casi 1000 gramos. 
 
-Lo mismo pasa con los valores mínimos: si observamos la tabla que viene a continuación, encontraremos diferencias en los valores por cada sexo.
+La diferencia más significativa vuelve a ser la de la masa corporal, que difiere en casi 1000 gramos.
 
-```{r}
+Lo mismo pasa con los valores mínimos, que los mostramos a continuación:
+
+```{r, echo=FALSE}
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
           data=pinguinos, FUN=min)
 ```
 
 ## Resumen especies
 
-Vamos a ver de manera resumida los daros recogidos anteriormente:
+Vamos a ver de manera resumida los datos recogidos anteriormente:
 
-```{r}
+```{r, echo=FALSE}
 summary(pinguinos)
 ```
+Una parte importante a analizar también es la presencia de valores atípicos. Para ello
 
-RESUMIR ESTO UN POCO MONO
 
-> > > > > > > fafaaced80dd78c770246be002389718e3bf0bc4
+
+
+
