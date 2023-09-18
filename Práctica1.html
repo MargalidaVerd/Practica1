@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -18,9 +18,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -47,43 +48,13 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -101,10 +72,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#datos-demográficos" id="toc-datos-demográficos" class="nav-link active" data-scroll-target="#datos-demográficos">Datos demográficos</a></li>
+  <li><a href="#estudio-por-especie" id="toc-estudio-por-especie" class="nav-link" data-scroll-target="#estudio-por-especie">Estudio por especie</a></li>
+  <li><a href="#estudio-por-sexo" id="toc-estudio-por-sexo" class="nav-link" data-scroll-target="#estudio-por-sexo">Estudio por sexo</a></li>
+  <li><a href="#resumen-especies" id="toc-resumen-especies" class="nav-link" data-scroll-target="#resumen-especies">Resumen especies</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -169,7 +151,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo <em>factor</em>: <code>Species</code>, que puede tomar tres valores (“Adelie”, “Chinstrap”, “Gentoo”); la variable <code>Island</code> asigna la isla de procedencia de cada individuo y toma tres valores también, que son “Biscoe”, “Dream” y “Torgersen”; finalmente los niveles de la variable <code>sex</code> son “female” y “male”.</p>
 <p>También encontramos dos variables del tipo <em>numérico</em>, que son <code>bill_length_mm</code>, que corresponde a la longitud del pico de cada pingüino, en milímetros , y <code>bill_depth_mm</code>, que corresponde al grosor del pico, también en milímetros.</p>
-<p>Finalmente, tenemos tres últimas variables de tipo <em>integer</em>: <code>flipper_length_mm</code>, que corresponde a la longitud de las aletas de cada pingüino, en milímetros; <code>body_mass_g</code>, que recoge la masa corporal en gramos de cada individuo; <code>year</code>, que se atubuye al año de estudio de cada pingüino (2007, 2008 o 2009).</p>
+<p>Finalmente, tenemos tres últimas variables de tipo <em>integer</em>: <code>flipper_length_mm</code>, que corresponde a la longitud de las aletas de cada pingüino, en milímetros; <code>body_mass_g</code>, que recoge la masa corporal en gramos de cada individuo; <code>year</code>, que se atribuye al año de estudio de cada pingüino (2007, 2008 o 2009).</p>
 <p>Observamos también que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores. Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pinguinos <span class="ot">=</span> <span class="fu">na.omit</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -186,7 +168,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       146        68       119 </code></pre>
 </div>
 </div>
-<p>Con cierta diferencia, la especie más poblada es la <em>Adelie</em>, seguida de <em>Gentoo</em> y, finalmente, <em>Chinstrap</em>, que es la menos poblada. Veámoslo gráficamente:</p>
+<p>Con cierta diferencia, la especie más poblada es la <em>Adelie</em>, seguida de <em>Gentoo</em> y, finalmente, <em>Chinstrap</em>. Veámoslo gráficamente:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -209,41 +191,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       163       123        47 </code></pre>
 </div>
 </div>
-<p>Como podemos ver, la isla más poblada es la Biscoe, seguida de Dream y, por último, ya más alejada en cuanto a valores, la isla Torgersen. Analicemos ahora la población de cada isla por especies; es decir, nos interesa saber la cantidad de pingüinos de cada especie en cada isla. Para ello utilizamos:</p>
+<p>Como podemos ver, la isla más poblada es la de <em>Biscoe</em>, seguida de <em>Dream</em> y, por último, ya más alejada en cuanto a valores, la isla <em>Torgersen</em>. Analicemos ahora la población de cada isla por especies; es decir, nos interesa ilustrar la cantidad de pingüinos de cada especie en cada isla. Ilustramos estos resultados:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>adelie <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Adelie"</span>),]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(adelie<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-   Biscoe     Dream Torgersen 
-       44        55        47 </code></pre>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data2<span class="ot">=</span> pinguinos[, <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data2, <span class="fu">aes</span>(island, <span class="at">fill =</span> species)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span> <span class="fu">guides</span>(<span class="at">fill=</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">""</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Práctica1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>gentoo <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Gentoo"</span>),]</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(gentoo<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-   Biscoe     Dream Torgersen 
-      119         0         0 </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>chinstrap <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Chinstrap"</span>),]</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(chinstrap<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-   Biscoe     Dream Torgersen 
-        0        68         0 </code></pre>
-</div>
-</div>
+<p>Como vemos en el gráfico, la especie <em>Adelie</em> se haya en las tres islas, mientras que las otras dos solo en una de ellas.</p>
 </section>
 <section id="estudio-por-especie" class="level2">
 <h2 class="anchored" data-anchor-id="estudio-por-especie">Estudio por especie</h2>
-<p>Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función <code>aggregate()</code> donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe.</p>
+<p>Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función <code>aggregate()</code>, donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )<span class="sc">~</span>species, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>pinguinos, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )<span class="sc">~</span>species, </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>pinguinos, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 1    Adelie       38.82397      18.34726          190.1027    3706.164
@@ -251,11 +215,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 3    Gentoo       47.56807      14.99664          217.2353    5092.437</code></pre>
 </div>
 </div>
-<p>Como podemos observar, la especie <em>Chinstrap</em> es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie <em>Gentoo</em> tiene las aletas más largas que las otras dos especies que están bastante cerca en realción a la media. Y, por último, la especie <em>Gentoo</em> tiene el peso medio considerablemente más alto que las demás que són bastante próximas numéricamente.</p>
-<p>Ahora bien, vamos a estudiar cada especie por separado. Empezaremos estudiando la especie <em>Adelie</em> que es la más abundante. Vamos a estudiar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.</p>
+<p>Como podemos observar, la especie <em>Chinstrap</em> es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie <em>Gentoo</em> tiene las aletas más largas que las otras dos especies que están bastante cerca en relación a la media. Y, por último, la especie <em>Gentoo</em> tiene el peso medio considerablemente más alto que las demás que són bastante próximas numéricamente.</p>
+<p>Ahora, vamos a estudiar cada especie por separado. Empezaremos estudiando la especie <em>Adelie</em> que es la más abundante. Vamos a estudiar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )<span class="sc">~</span>island,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>adelie, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>adelie <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Adelie"</span>),]</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )<span class="sc">~</span>island,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>adelie, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 1    Biscoe        38.9750      18.37045          188.7955    3709.659
@@ -266,11 +231,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Podemos observar que las medias de la largaria y anchura del pico son próximas numericamente. En cambio, las aletas de los pingüinos <em>Adelie</em> de la isla <em>Torgersen</em> són un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no podemos observar diferencias significativas entre el peso de los pingüinos <em>Adelie</em> en referencia a habitar una isla u otra.</p>
 <p>Notemos que con las especies <em>Chinstrap</em> y <em>Gentoo</em> no podemos hacer el estudio de las diferentes islas ya que sólo habitan una: la especie <em>Chinstrap</em> habita en <em>Dream</em> y la <em>Gentoo</em> en <em>Biscoe</em>.</p>
 </section>
+<section id="estudio-por-sexo" class="level2">
+<h2 class="anchored" data-anchor-id="estudio-por-sexo">Estudio por sexo</h2>
+<p>En esta sección, analizaremos las posibles diferencias entre sexos. Veámoslo de forma sencilla:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )<span class="sc">~</span>sex,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>pinguinos, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     sex bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+1 female       42.09697      16.42545          197.3636    3862.273
+2   male       45.85476      17.89107          204.5060    4545.685</code></pre>
+</div>
+</div>
+<p>Como se aprecia en la tabla anterior, hay algunas diferencias significativas entre sexos, donde el sexo masculino tiene los valores más altos. Cabe destacar la masa corporal: mientras que la media de las hembras ronda los 3900 gramos, la de los machos supera esta cifra en casi 700 gramos.</p>
+<p>Fijémonos ahora en los máximos de cada variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )<span class="sc">~</span>sex,</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>pinguinos, <span class="at">FUN=</span> max)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     sex bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+1 female           58.0          20.7               222        5200
+2   male           59.6          21.5               231        6300</code></pre>
+</div>
+</div>
+<p>La diferencia más significativa vuelve a ser la de la masa corporal, que difiere en casi 1000 gramos.</p>
+<p>Lo mismo pasa con los valores mínimos: si observamos la tabla que viene a continuación, encontraremos diferencias en los valores por cada sexo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )<span class="sc">~</span>sex,</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>pinguinos, <span class="at">FUN=</span>min)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     sex bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+1 female           32.1          13.1               172        2700
+2   male           34.6          14.1               178        3250</code></pre>
+</div>
+</div>
+</section>
 <section id="resumen-especies" class="level2">
 <h2 class="anchored" data-anchor-id="resumen-especies">Resumen especies</h2>
 <p>Vamos a ver de manera resumida los daros recogidos anteriormente:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pinguinos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pinguinos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      species          island    bill_length_mm  bill_depth_mm  
  Adelie   :146   Biscoe   :163   Min.   :32.10   Min.   :13.10  
@@ -335,9 +335,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -402,6 +416,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
