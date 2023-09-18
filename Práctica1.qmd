@@ -96,7 +96,6 @@ Podemos observar que las medias de la largaria y anchura del pico son próximas 
 
 Notemos que con las especies *Chinstrap* y *Gentoo* no podemos hacer el estudio de las diferentes islas ya que sólo habitan una: la especie *Chinstrap* habita en *Dream* y la *Gentoo* en *Biscoe*.
 
-
 ## Estudio por sexo
 
 En esta sección, analizaremos las posibles diferencias entre sexos. Veámoslo de forma sencilla:
@@ -106,7 +105,7 @@ aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~
           data=pinguinos, FUN=mean)
 ```
 
-Como se aprecia en la tabla anterior, hay algunas diferencias significativas entre sexos, donde el sexo masculino tiene los valores más altos. Cabe destacar la masa corporal: mientras que la media de las hembras ronda los 3900 gramos, la de los machos supera esta cifra en casi 700 gramos. 
+Como se aprecia en la tabla anterior, hay algunas diferencias significativas entre sexos, donde el sexo masculino tiene los valores más altos. Cabe destacar la masa corporal: mientras que la media de las hembras ronda los 3900 gramos, la de los machos supera esta cifra en casi 700 gramos.
 
 Fijémonos ahora en los máximos de cada variable:
 
@@ -114,7 +113,8 @@ Fijémonos ahora en los máximos de cada variable:
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
           data=pinguinos, FUN= max)
 ```
-La diferencia más significativa vuelve a ser la de la masa corporal, que difiere en casi 1000 gramos. 
+
+La diferencia más significativa vuelve a ser la de la masa corporal, que difiere en casi 1000 gramos.
 
 Lo mismo pasa con los valores mínimos: si observamos la tabla que viene a continuación, encontraremos diferencias en los valores por cada sexo.
 
