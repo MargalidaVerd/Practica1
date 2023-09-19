@@ -4,6 +4,14 @@ author: "Carla Martínez, Patricia Mateu, Margalida Verd"
 format: html
 editor: visual
 ---
+CADA VARIABLE
+- cualitativa - describir como se llaman y cuantas hay de cada tipo
+- cuantos pingus hay en cada isla
+- summary de los pingus + desviación típica sd()
+
+EN GENERAL
+- Todas la especies viven en todas las islas?
+- De que especie es el pinguino que tiene el pico más largo/ancho....??
 
 Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.
 
@@ -87,6 +95,7 @@ Vamos a analizar las diferentes característcas de cada especie. En primer lugar
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species, 
           data=pinguinos, FUN=mean)
 ```
+
 Como podemos observar, la especie *Chinstrap* es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie *Gentoo* tiene las aletas más largas que las otras dos especies que están bastante cerca en realción a la media. Y, por último, la especie *Gentoo* tiene el peso medio considerablemente más alto que las demás que són bastante próximas numéricamente.
 
 Ahora bien, vamos a estudiar cada especie por separado. Empezaremos estudiando la especie *Adelie* que es la más abundante. Vamos a estudiar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.
@@ -98,8 +107,7 @@ aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~
 
 Podemos observar que las medias de la largaria y anchura del pico son próximas numericamente. En cambio, las aletas de los pingüinos *Adelie* de la isla *Torgersen* són un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no podemos observar diferencias significativas entre el peso de los pingüinos *Adelie* en referencia a habitar una isla u otra.
 
-Notemos que con las especies *Chinstrap* y *Gentoo* no podemos hacer el estudio de las diferentes islas ya que sólo habitan una: la especie *Chinstrap* habita en *Dream* y la *Gentoo* en *Biscoe*. 
-
+Notemos que con las especies *Chinstrap* y *Gentoo* no podemos hacer el estudio de las diferentes islas ya que sólo habitan una: la especie *Chinstrap* habita en *Dream* y la *Gentoo* en *Biscoe*.
 
 ## Resumen especies
 
@@ -108,7 +116,22 @@ Vamos a ver de manera resumida los daros recogidos anteriormente:
 ```{r}
 summary(pinguinos)
 ```
+
 RESUMIR ESTO UN POCO MONO
+
+
+```{r}
+boxplot(pinguinos$body_mass_g, 
+        main = "Peso Pingüinos",
+        boxwex = 0.45,col="blue")
+```
+```{r, warning=FALSE}
+mod = lm(body_mass_g ~ bill_length_mm + bill_depth_mm + flipper_length_mm, data=pinguinos)
+library(car)
+outlierTest(mod, cutoff=Inf)
+influenceIndexPlot(mod, vars="Bonf", las=1)
+```
+
 
 
 > > > > > > > fafaaced80dd78c770246be002389718e3bf0bc4
