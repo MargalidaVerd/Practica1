@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Carla Martínez, Patricia Mateu, Margalida Verd">
+<meta name="author" content="Carla Martínez, Patricia Mateu i Margalida Verd">
 
 <title>Práctica 1</title>
 <style>
@@ -101,10 +101,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </head>
 
-<body class="fullcontent">
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#datos-demográficos" id="toc-datos-demográficos" class="nav-link active" data-scroll-target="#datos-demográficos">Datos demográficos</a></li>
+  <li><a href="#estudio-por-especie" id="toc-estudio-por-especie" class="nav-link" data-scroll-target="#estudio-por-especie">Estudio por especie</a></li>
+  <li><a href="#estudio-por-sexo" id="toc-estudio-por-sexo" class="nav-link" data-scroll-target="#estudio-por-sexo">Estudio por sexo</a></li>
+  <li><a href="#estudio-por-año-de-registro" id="toc-estudio-por-año-de-registro" class="nav-link" data-scroll-target="#estudio-por-año-de-registro">Estudio por año de registro</a></li>
+  <li><a href="#conclusión" id="toc-conclusión" class="nav-link" data-scroll-target="#conclusión">Conclusión</a></li>
+  </ul>
+</nav>
+</div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -119,7 +131,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Carla Martínez, Patricia Mateu, Margalida Verd </p>
+             <p>Carla Martínez, Patricia Mateu i Margalida Verd </p>
           </div>
   </div>
     
@@ -130,11 +142,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<p>Primero instalamos el paquete “palmerpenguins” y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.</p>
+<p>FALTA POR HACER - ver que nº es el/la pingüino con los max i los min (marcado como título)</p>
+<p>Primero instalamos el paquete <code>palmerpenguins</code> y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("palmerpenguins")</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"palmerpenguins"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(penguins,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 8
    species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
@@ -154,7 +164,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Veamos su estructura:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
  $ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
@@ -167,83 +176,85 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
 </div>
 </div>
-<p>Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo <em>factor</em>: <code>Species</code>, que puede tomar tres valores (“Adelie”, “Chinstrap”, “Gentoo”); la variable <code>Island</code> asigna la isla de procedencia de cada individuo y toma tres valores también, que son “Biscoe”, “Dream” y “Torgersen”; finalmente los niveles de la variable <code>sex</code> son “female” y “male”.</p>
-<p>También encontramos dos variables del tipo <em>numérico</em>, que son <code>bill_length_mm</code>, que corresponde a la longitud del pico de cada pingüino, en milímetros , y <code>bill_depth_mm</code>, que corresponde al grosor del pico, también en milímetros.</p>
-<p>Finalmente, tenemos tres últimas variables de tipo <em>integer</em>: <code>flipper_length_mm</code>, que corresponde a la longitud de las aletas de cada pingüino, en milímetros; <code>body_mass_g</code>, que recoge la masa corporal en gramos de cada individuo; <code>year</code>, que se atubuye al año de estudio de cada pingüino (2007, 2008 o 2009).</p>
-<p>Observamos también que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores. Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.</p>
+<p>Observemos que la variable <code>year</code> es considerada un número pero no nos aporta información numérica sino que es más un factor a tener en cuenta como dato y no como número. Así pues, vamos a considerarla un factor:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pinguinos <span class="ot">=</span> <span class="fu">na.omit</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>penguins<span class="sc">$</span>year <span class="ot">=</span> <span class="fu">as.factor</span>(penguins<span class="sc">$</span>year)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
+ $ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ island           : Factor w/ 3 levels "Biscoe","Dream",..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+ $ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+ $ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+ $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+ $ sex              : Factor w/ 2 levels "female","male": 2 1 1 NA 1 2 1 2 NA NA ...
+ $ year             : Factor w/ 3 levels "2007","2008",..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+</div>
+<p>Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo <em>factor</em>: <code>species</code>, que puede tomar tres valores (“Adelie”, “Chinstrap”, “Gentoo”); la variable <code>island</code>, que asigna la isla de procedencia de cada individuo y toma tres valores también, que son “Biscoe”, “Dream” y “Torgersen”; finalmente los niveles de la variable <code>sex</code> son “female” y “male”, y <code>year</code>, que se atribuye al año de estudio de cada pingüino (2007, 2008 o 2009).</p>
+<p>También encontramos dos variables del tipo <em>numérico</em>, que son <code>bill_length_mm</code>, que corresponde a la longitud del pico de cada pingüino, en milímetros, y <code>bill_depth_mm</code>, que corresponde al grosor del pico, también en milímetros.</p>
+<p>Finalmente, tenemos tres últimas variables de tipo <em>integer</em>: <code>flipper_length_mm</code>, que corresponde a la longitud de las aletas de cada pingüino, en milímetros, y <code>body_mass_g</code>, que recoge la masa corporal en gramos de cada individuo.</p>
+<p>Observamos también que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores ya que no nos interesa trabajar con sujetos que no tienen la información completa (si los dejamos el estudio podría salir con errores). Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.</p>
+<div class="cell">
+
 </div>
 <p>Una vez hemos limpiado los datos, empezamos con el análisis descriptivo.</p>
 <section id="datos-demográficos" class="level2">
 <h2 class="anchored" data-anchor-id="datos-demográficos">Datos demográficos</h2>
-<p>Empecemos por las frecuencias relativas de cada especie de pingüino:</p>
+<p>Primero de todo, vamos a hacer un análisis de los datos básicos de la muestra, para familiarizarnos con ellos y poder estudiarlos con detalle más adelante. Empecemos por las especies de pingüinos. Recordemos que hay tres:</p>
+<ul>
+<li><p>“Adelie”</p></li>
+<li><p>“Chinstrap”</p></li>
+<li><p>“Gentoo”</p></li>
+</ul>
+<p>Veamos sus frecuencias relativas:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pinguinos<span class="sc">$</span>species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    Adelie Chinstrap    Gentoo 
       146        68       119 </code></pre>
 </div>
 </div>
-<p>Con cierta diferencia, la especie más poblada es la <em>Adelie</em>, seguida de <em>Gentoo</em> y, finalmente, <em>Chinstrap</em>, que es la menos poblada. Veámoslo gráficamente:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">group =</span> <span class="fu">c</span>(<span class="st">"Adelie"</span>, <span class="st">"Gentoo"</span>, <span class="st">"Chinstrap"</span>), <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">146</span>, <span class="dv">119</span>, <span class="dv">68</span>))</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> value, <span class="at">fill =</span> group)) <span class="sc">+</span> <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_polar</span>(<span class="at">theta =</span> <span class="st">"y"</span>) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill=</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">""</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Práctica1_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<p>Con cierta diferencia, la especie más poblada es la <em>Adelie</em>, seguida de <em>Gentoo</em> y, finalmente, <em>Chinstrap</em>.</p>
 <p>También es interesante estudiar la población por islas. A continuación lo vemos:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(pinguinos<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
    Biscoe     Dream Torgersen 
       163       123        47 </code></pre>
 </div>
 </div>
-<p>Como podemos ver, la isla más poblada es la Biscoe, seguida de Dream y, por último, ya más alejada en cuanto a valores, la isla Torgersen. Analicemos ahora la población de cada isla por especies; es decir, nos interesa saber la cantidad de pingüinos de cada especie en cada isla. Para ello utilizamos:</p>
+<p>Como podemos ver, la isla más poblada es la de <em>Biscoe</em>, seguida de <em>Dream</em> y, por último, ya más alejada en cuanto a valores, la isla <em>Torgersen</em>.</p>
+<p>Analicemos ahora la población de cada isla por especies; es decir, nos interesa ilustrar la cantidad de pingüinos de cada especie en cada isla. En el siguiente gráfico vemos como la especie <em>Adelie</em> se haya en las tres islas, mientras que las otras dos solo en una de ellas.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>adelie <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Adelie"</span>),]</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(adelie<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Práctica1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Un dato también a tener en cuenta en nuestro AED es el año de estudio de los individuos. Visualicemos el recuento:</p>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
-   Biscoe     Dream Torgersen 
-       44        55        47 </code></pre>
+2007 2008 2009 
+ 103  113  117 </code></pre>
 </div>
 </div>
+<p>El tamaño de las muestras de cada año no fluctua significativamente.</p>
+<p>Finalmente, veamos el sexo de los individuos de la muestra:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>gentoo <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Gentoo"</span>),]</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(gentoo<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-   Biscoe     Dream Torgersen 
-      119         0         0 </code></pre>
+female   male 
+   165    168 </code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>chinstrap <span class="ot">=</span> pinguinos[<span class="fu">which</span>(pinguinos<span class="sc">$</span>species <span class="sc">==</span> <span class="st">"Chinstrap"</span>),]</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(chinstrap<span class="sc">$</span>island)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-   Biscoe     Dream Torgersen 
-        0        68         0 </code></pre>
-</div>
-</div>
+<p>No notamos mucha diferencia entre machos y hembras, por lo que se podrá estudiar más adelante si existen diferencias en las características de los pingüinos en función del sexo cromosómico de estos.</p>
 </section>
 <section id="estudio-por-especie" class="level2">
 <h2 class="anchored" data-anchor-id="estudio-por-especie">Estudio por especie</h2>
-<p>Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función <code>aggregate()</code> donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe.</p>
+<p>Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función <code>aggregate()</code>, donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )<span class="sc">~</span>species, </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>pinguinos, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 1    Adelie       38.82397      18.34726          190.1027    3706.164
@@ -251,11 +262,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 3    Gentoo       47.56807      14.99664          217.2353    5092.437</code></pre>
 </div>
 </div>
-<p>Como podemos observar, la especie <em>Chinstrap</em> es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie <em>Gentoo</em> tiene las aletas más largas que las otras dos especies que están bastante cerca en realción a la media. Y, por último, la especie <em>Gentoo</em> tiene el peso medio considerablemente más alto que las demás que són bastante próximas numéricamente.</p>
-<p>Ahora bien, vamos a estudiar cada especie por separado. Empezaremos estudiando la especie <em>Adelie</em> que es la más abundante. Vamos a estudiar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.</p>
+<p>Como podemos observar, la especie <em>Chinstrap</em> es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie <em>Gentoo</em> tiene las aletas más largas que las otras dos especies que están bastante cerca en realción a la media. Y, por último, la especie <em>Gentoo</em> tiene el peso medio considerablemente más alto que las demás que son bastante próximas numéricamente.</p>
+<p>Ahora vamos a estudiar cada especie por separado. Empezaremos estudiando la especie <em>Adelie</em>, que es la más abundante. Vamos a mostrar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(<span class="fu">cbind</span>(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )<span class="sc">~</span>island,</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>          <span class="at">data=</span>adelie, <span class="at">FUN=</span>mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
 1    Biscoe        38.9750      18.37045          188.7955    3709.659
@@ -263,14 +272,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 3 Torgersen        39.0383      18.45106          191.5319    3708.511</code></pre>
 </div>
 </div>
-<p>Podemos observar que las medias de la largaria y anchura del pico son próximas numericamente. En cambio, las aletas de los pingüinos <em>Adelie</em> de la isla <em>Torgersen</em> són un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no podemos observar diferencias significativas entre el peso de los pingüinos <em>Adelie</em> en referencia a habitar una isla u otra.</p>
+<p>Podemos observar que las medias de la largaria y anchura del pico son próximas numéricamente. En cambio, las aletas de los pingüinos <em>Adelie</em> de la isla <em>Torgersen</em> son un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no notamos diferencias significativas entre el peso de los pingüinos <em>Adelie</em> en referencia a habitar una isla u otra.</p>
 <p>Notemos que con las especies <em>Chinstrap</em> y <em>Gentoo</em> no podemos hacer el estudio de las diferentes islas ya que sólo habitan una: la especie <em>Chinstrap</em> habita en <em>Dream</em> y la <em>Gentoo</em> en <em>Biscoe</em>.</p>
 </section>
-<section id="resumen-especies" class="level2">
-<h2 class="anchored" data-anchor-id="resumen-especies">Resumen especies</h2>
-<p>Vamos a ver de manera resumida los daros recogidos anteriormente:</p>
+<section id="estudio-por-sexo" class="level2">
+<h2 class="anchored" data-anchor-id="estudio-por-sexo">Estudio por sexo</h2>
+<p>En esta sección, analizaremos las posibles diferencias entre sexos. Veámoslo de forma sencilla:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pinguinos)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     sex bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+1 female       42.09697      16.42545          197.3636    3862.273
+2   male       45.85476      17.89107          204.5060    4545.685</code></pre>
+</div>
+</div>
+<p>Como se aprecia en la tabla anterior, hay algunas diferencias significativas entre sexos, donde el sexo masculino toma siempre los valores más altos. Cabe destacar la masa corporal: mientras que la media de las hembras ronda los 3900 gramos, la de los machos supera esta cifra en casi 700 gramos.</p>
+<p>Fijémonos ahora en los máximos de cada variable:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     sex bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+1 female           58.0          20.7               222        5200
+2   male           59.6          21.5               231        6300</code></pre>
+</div>
+</div>
+<p>La diferencia más significativa vuelve a ser la de la masa corporal, que difiere en casi 1000 gramos (1kg).</p>
+<p>Lo mismo pasa con los valores mínimos, que los mostramos a continuación:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     sex bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+1 female           32.1          13.1               172        2700
+2   male           34.6          14.1               178        3250</code></pre>
+</div>
+</div>
+<p>####VER QUE Nº ES EL/LA PINGÜINO CON LOS MAX I LOS MIN</p>
+</section>
+<section id="estudio-por-año-de-registro" class="level2">
+<h2 class="anchored" data-anchor-id="estudio-por-año-de-registro">Estudio por año de registro</h2>
+<p>Como hemos visto antes, cada año se tomaron datos de, aproximadamente 100 pingüinos. En esta sección analizamos con detalle si existen diferencias en función del año de estudio. Empecemos con las medias, como hemos hecho ya en las dos secciones anteriores:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  year bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+1 2007       44.01942      17.41456          197.2427    4153.155
+2 2008       43.51770      16.93628          202.6991    4263.274
+3 2009       44.42821      17.16581          202.5726    4200.214</code></pre>
+</div>
+</div>
+<p>La variación que más destaca es la media de la longitud de las aletas entre el 2007 y el 2008. Así mismo, en estos mismos años, la masa corporal de los pingüinos aumentó 110 gramos con respecto el año anterior.</p>
+</section>
+<section id="conclusión" class="level2">
+<h2 class="anchored" data-anchor-id="conclusión">Conclusión</h2>
+<p>Vamos a ver de manera resumida los datos recogidos anteriormente:</p>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>      species          island    bill_length_mm  bill_depth_mm  
  Adelie   :146   Biscoe   :163   Min.   :32.10   Min.   :13.10  
@@ -279,31 +330,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
                                  Mean   :43.99   Mean   :17.16  
                                  3rd Qu.:48.60   3rd Qu.:18.70  
                                  Max.   :59.60   Max.   :21.50  
- flipper_length_mm  body_mass_g       sex           year     
- Min.   :172       Min.   :2700   female:165   Min.   :2007  
- 1st Qu.:190       1st Qu.:3550   male  :168   1st Qu.:2007  
- Median :197       Median :4050                Median :2008  
- Mean   :201       Mean   :4207                Mean   :2008  
- 3rd Qu.:213       3rd Qu.:4775                3rd Qu.:2009  
- Max.   :231       Max.   :6300                Max.   :2009  </code></pre>
+ flipper_length_mm  body_mass_g       sex        year    
+ Min.   :172       Min.   :2700   female:165   2007:103  
+ 1st Qu.:190       1st Qu.:3550   male  :168   2008:113  
+ Median :197       Median :4050                2009:117  
+ Mean   :201       Mean   :4207                          
+ 3rd Qu.:213       3rd Qu.:4775                          
+ Max.   :231       Max.   :6300                          </code></pre>
 </div>
 </div>
-<p>RESUMIR ESTO UN POCO MONO</p>
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>fafaaced80dd78c770246be002389718e3bf0bc4</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>Notemos que el único cálculo que nos faltaría es la deviación típica de las variables numéricas. Para no tener que calcularlas una a una, utilizaremos la librería <code>psych</code> donde tenemos la funcion <code>describe()</code> que nos recoge los datos parecido a como lo haría un summary pero con otro parámetros que nos podrían interesar (la desviación típica entre otros). Por tanto, de la información que nos ofrece cogeremos aquellos que nos interesa investigar, en este caso, la media, la desviación típica, la mediana, el mínimo y el màximo de las variables <code>bill_length_mm</code>, <code>bill_depth_mm</code>,<code>flipper_length_mm</code>, <code>body_mass_g</code>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'psych'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:ggplot2':
+
+    %+%, alpha</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mean     sd median trimmed    min    max  skew
+bill_length_mm      43.99   5.47   44.5   43.98   32.1   59.6  0.04
+bill_depth_mm       17.16   1.97   17.3   17.19   13.1   21.5 -0.15
+flipper_length_mm  200.97  14.02  197.0  200.36  172.0  231.0  0.36
+body_mass_g       4207.06 805.22 4050.0 4159.46 2700.0 6300.0  0.47</code></pre>
+</div>
+</div>
+<p>Observando los datos que nos da <code>summary()</code>, nos ofrece información ya calculada anteriormente para las variables <code>species</code>, <code>island</code>, <code>sex</code> y <code>year</code>. Vamos a analizar un poco más los datos recogidos en la tabla superior. Primero de todo, vamos a definir cada variable que hemos calculado: <code>mean</code> la media, <code>sd</code> la desviación típica, <code>median</code> la mediana, <code>trimmed</code> la media recortada, <code>min</code> el mínimo, <code>max</code> el máximo y <code>skew</code> el sesgo.</p>
+<p>Si comparamos la media recortada (<code>trimmed</code>) con la media general (<code>mean</code>), podemos descubrir cuando los outliers estan sesgando la media con valores extremos. Como podemos ver las medias de las variables son muy próximas numéricamente a la media recortada cosa que nos indica que tenemos pocos o ningún outier en estas variables. Además, en comparación a sus respectivas medianas, también observamos que la distacia ente ellas es mínima.</p>
+<p>Por otro lado, la variable <code>skew</code>(sesgo) nos ayuda a ver cuanto sesguegan la media los outliers que pudieran haber. Por tanto, notemos que todos los valores son menores a 1, cosa que nos hacer reafirmar la inexistencia de outliers en las variables <code>bill_length_mm</code>, <code>bill_depth_mm</code>,<code>flipper_length_mm</code>, <code>body_mass_g</code>.</p>
 </section>
 
 </main>

@@ -1,21 +1,18 @@
 ---
 title: "Práctica 1"
-author: "Carla Martínez, Patricia Mateu, Margalida Verd"
+author: "Carla Martínez, Patricia Mateu i Margalida Verd"
 format: html
+toc: true
 editor: visual
+len: spanish
 ---
-CADA VARIABLE
-- cualitativa - describir como se llaman y cuantas hay de cada tipo
-- cuantos pingus hay en cada isla
-- summary de los pingus + desviación típica sd()
 
-EN GENERAL
-- Todas la especies viven en todas las islas?
-- De que especie es el pinguino que tiene el pico más largo/ancho....??
+FALTA POR HACER
+- ver que nº es el/la pingüino con los max i los min (marcado como título)
 
-Primero instalamos el paquete "palmerpenguins" y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente.
+Primero instalamos el paquete `palmerpenguins` y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente:
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, echo = FALSE}
 #install.packages("palmerpenguins")
 library("palmerpenguins")
 head(penguins,10)
@@ -23,19 +20,24 @@ head(penguins,10)
 
 Veamos su estructura:
 
+```{r, echo = FALSE}
+str(penguins)
+```
+Observemos que la variable `year` es considerada un número pero no nos aporta información numérica sino que es más un factor a tener en cuenta como dato y no como número. Así pues, vamos a considerarla un factor:
+
 ```{r}
+penguins$year = as.factor(penguins$year)
 str(penguins)
 ```
 
-Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo *factor*: `Species`, que puede tomar tres valores ("Adelie", "Chinstrap", "Gentoo"); la variable `Island` asigna la isla de procedencia de cada individuo y toma tres valores también, que son "Biscoe", "Dream" y "Torgersen"; finalmente los niveles de la variable `sex` son "female" y "male".
+Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo *factor*: `species`, que puede tomar tres valores ("Adelie", "Chinstrap", "Gentoo"); la variable `island`, que asigna la isla de procedencia de cada individuo y toma tres valores también, que son "Biscoe", "Dream" y "Torgersen"; finalmente los niveles de la variable `sex` son "female" y "male", y `year`, que se atribuye al año de estudio de cada pingüino (2007, 2008 o 2009).
 
-También encontramos dos variables del tipo *numérico*, que son `bill_length_mm`, que corresponde a la longitud del pico de cada pingüino, en milímetros , y `bill_depth_mm`, que corresponde al grosor del pico, también en milímetros.
+También encontramos dos variables del tipo *numérico*, que son `bill_length_mm`, que corresponde a la longitud del pico de cada pingüino, en milímetros, y `bill_depth_mm`, que corresponde al grosor del pico, también en milímetros.
 
-Finalmente, tenemos tres últimas variables de tipo *integer*: `flipper_length_mm`, que corresponde a la longitud de las aletas de cada pingüino, en milímetros; `body_mass_g`, que recoge la masa corporal en gramos de cada individuo; `year`, que se atubuye al año de estudio de cada pingüino (2007, 2008 o 2009).
+Finalmente, tenemos tres últimas variables de tipo *integer*: `flipper_length_mm`, que corresponde a la longitud de las aletas de cada pingüino, en milímetros, y `body_mass_g`, que recoge la masa corporal en gramos de cada individuo.
 
-Observamos también que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores. Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.
-
-```{r}
+Observamos también que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores ya que no nos interesa trabajar con sujetos que no tienen la información completa (si los dejamos el estudio podría salir con errores). Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.
+```{r, echo = FALSE}
 pinguinos = na.omit(penguins)
 ```
 
@@ -43,95 +45,131 @@ Una vez hemos limpiado los datos, empezamos con el análisis descriptivo.
 
 ## Datos demográficos
 
-Empecemos por las frecuencias relativas de cada especie de pingüino:
+Primero de todo, vamos a hacer un análisis de los datos básicos de la muestra, para familiarizarnos con ellos y poder estudiarlos con detalle más adelante. Empecemos por las especies de pingüinos. Recordemos que hay tres:
 
-```{r}
+-   "Adelie"
+
+-   "Chinstrap"
+
+-   "Gentoo"
+
+Veamos sus frecuencias relativas:
+```{r, echo=FALSE}
 table(pinguinos$species)
 ```
 
-Con cierta diferencia, la especie más poblada es la *Adelie*, seguida de *Gentoo* y, finalmente, *Chinstrap*, que es la menos poblada. Veámoslo gráficamente:
-
-```{r, warning=FALSE}
-
-library(ggplot2)
-
-data = data.frame(group = c("Adelie", "Gentoo", "Chinstrap"), value = c(146, 119, 68))
-
-ggplot(data, aes(x = "", y = value, fill = group)) + geom_col() +
-  coord_polar(theta = "y") +
-  theme_void() +
-  guides(fill= guide_legend(title = ""))
-
-```
+Con cierta diferencia, la especie más poblada es la *Adelie*, seguida de *Gentoo* y, finalmente, *Chinstrap*. 
 
 También es interesante estudiar la población por islas. A continuación lo vemos:
-
-```{r}
+```{r, echo = FALSE}
 table(pinguinos$island)
 ```
 
-Como podemos ver, la isla más poblada es la Biscoe, seguida de Dream y, por último, ya más alejada en cuanto a valores, la isla Torgersen. Analicemos ahora la población de cada isla por especies; es decir, nos interesa saber la cantidad de pingüinos de cada especie en cada isla. Para ello utilizamos:
+Como podemos ver, la isla más poblada es la de *Biscoe*, seguida de *Dream* y, por último, ya más alejada en cuanto a valores, la isla *Torgersen*. 
 
-```{r}
-adelie = pinguinos[which(pinguinos$species == "Adelie"),]
-table(adelie$island)
+Analicemos ahora la población de cada isla por especies; es decir, nos interesa ilustrar la cantidad de pingüinos de cada especie en cada isla. En el siguiente gráfico vemos como la especie *Adelie* se haya en las tres islas, mientras que las otras dos solo en una de ellas.
+
+```{r, echo=FALSE, warning=FALSE}
+library(ggplot2)
+data2= pinguinos[, c(1,2)]
+ggplot(data2, aes(island, fill = species)) +
+  geom_bar() + guides(fill= guide_legend(title = ""))
 ```
 
-```{r}
-gentoo = pinguinos[which(pinguinos$species == "Gentoo"),]
-table(gentoo$island)
+Un dato también a tener en cuenta en nuestro AED es el año de estudio de los individuos. Visualicemos el recuento:
+```{r, echo=FALSE}
+table(pinguinos$year)
 ```
+El tamaño de las muestras de cada año no fluctua significativamente.
 
-```{r}
-chinstrap = pinguinos[which(pinguinos$species == "Chinstrap"),]
-table(chinstrap$island)
+Finalmente, veamos el sexo de los individuos de la muestra:
+```{r, echo=FALSE}
+table(pinguinos$sex)
 ```
+No notamos mucha diferencia entre machos y hembras, por lo que se podrá estudiar más adelante si existen diferencias en las características de los pingüinos en función del sexo cromosómico de estos.
 
 ## Estudio por especie
 
-Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función `aggregate()` donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe.
+Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función `aggregate()`, donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe.
 
-```{r}
+```{r, echo=FALSE}
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species, 
           data=pinguinos, FUN=mean)
 ```
 
-Como podemos observar, la especie *Chinstrap* es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie *Gentoo* tiene las aletas más largas que las otras dos especies que están bastante cerca en realción a la media. Y, por último, la especie *Gentoo* tiene el peso medio considerablemente más alto que las demás que són bastante próximas numéricamente.
+Como podemos observar, la especie *Chinstrap* es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie *Gentoo* tiene las aletas más largas que las otras dos especies que están bastante cerca en realción a la media. Y, por último, la especie *Gentoo* tiene el peso medio considerablemente más alto que las demás que son bastante próximas numéricamente.
 
-Ahora bien, vamos a estudiar cada especie por separado. Empezaremos estudiando la especie *Adelie* que es la más abundante. Vamos a estudiar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.
+Ahora vamos a estudiar cada especie por separado. Empezaremos estudiando la especie *Adelie*, que es la más abundante. Vamos a mostrar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.
 
-```{r}
+```{r, echo=FALSE}
+adelie = pinguinos[which(pinguinos$species == "Adelie"),]
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~island,
           data=adelie, FUN=mean)
 ```
 
-Podemos observar que las medias de la largaria y anchura del pico son próximas numericamente. En cambio, las aletas de los pingüinos *Adelie* de la isla *Torgersen* són un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no podemos observar diferencias significativas entre el peso de los pingüinos *Adelie* en referencia a habitar una isla u otra.
+Podemos observar que las medias de la largaria y anchura del pico son próximas numéricamente. En cambio, las aletas de los pingüinos *Adelie* de la isla *Torgersen* son un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no notamos diferencias significativas entre el peso de los pingüinos *Adelie* en referencia a habitar una isla u otra.
 
 Notemos que con las especies *Chinstrap* y *Gentoo* no podemos hacer el estudio de las diferentes islas ya que sólo habitan una: la especie *Chinstrap* habita en *Dream* y la *Gentoo* en *Biscoe*.
 
-## Resumen especies
 
-Vamos a ver de manera resumida los daros recogidos anteriormente:
+## Estudio por sexo
 
-```{r}
+En esta sección, analizaremos las posibles diferencias entre sexos. Veámoslo de forma sencilla:
+
+```{r, echo= FALSE}
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
+          data=pinguinos, FUN=mean)
+```
+
+Como se aprecia en la tabla anterior, hay algunas diferencias significativas entre sexos, donde el sexo masculino toma siempre los valores más altos. Cabe destacar la masa corporal: mientras que la media de las hembras ronda los 3900 gramos, la de los machos supera esta cifra en casi 700 gramos.
+
+Fijémonos ahora en los máximos de cada variable:
+
+```{r, echo=FALSE}
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
+          data=pinguinos, FUN= max)
+```
+
+La diferencia más significativa vuelve a ser la de la masa corporal, que difiere en casi 1000 gramos (1kg).
+
+Lo mismo pasa con los valores mínimos, que los mostramos a continuación:
+
+```{r, echo=FALSE}
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
+          data=pinguinos, FUN=min)
+```
+####VER QUE Nº ES EL/LA PINGÜINO CON LOS MAX I LOS MIN
+
+## Estudio por año de registro
+
+Como hemos visto antes, cada año se tomaron datos de, aproximadamente 100 pingüinos. En esta sección analizamos con detalle si existen diferencias en función del año de estudio. Empecemos con las medias, como hemos hecho ya en las dos secciones anteriores:
+
+```{r, echo = FALSE}
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~year,
+          data=pinguinos, FUN=mean)
+```
+
+La variación que más destaca es la media de la longitud de las aletas entre el 2007 y el 2008. Así mismo, en estos mismos años, la masa corporal de los pingüinos aumentó 110 gramos con respecto el año anterior. 
+
+
+## Conclusión
+
+Vamos a ver de manera resumida los datos recogidos anteriormente:
+
+```{r, echo=FALSE}
 summary(pinguinos)
 ```
 
-RESUMIR ESTO UN POCO MONO
+Notemos que el único cálculo que nos faltaría es la deviación típica de las variables numéricas. Para no tener que calcularlas una a una, utilizaremos la librería `psych` donde tenemos la funcion `describe()` que nos recoge los datos parecido a como lo haría un summary pero con otro parámetros que nos podrían interesar (la desviación típica entre otros). Por tanto, de la información que nos ofrece cogeremos aquellos que nos interesa investigar, en este caso, la media, la desviación típica, la mediana, el mínimo y el màximo de las variables `bill_length_mm`, `bill_depth_mm`,`flipper_length_mm`, `body_mass_g`.
 
-
-```{r}
-boxplot(pinguinos$body_mass_g, 
-        main = "Peso Pingüinos",
-        boxwex = 0.45,col="blue")
+```{r, echo=FALSE, warning=FALSE}
+library(psych)
+datos=pinguinos[, c(3,4,5,6)]
+describe(datos)[, c(3,4,5,6,8,9,11)]
 ```
-```{r, warning=FALSE}
-mod = lm(body_mass_g ~ bill_length_mm + bill_depth_mm + flipper_length_mm, data=pinguinos)
-library(car)
-outlierTest(mod, cutoff=Inf)
-influenceIndexPlot(mod, vars="Bonf", las=1)
-```
+Observando los datos que nos da `summary()`, nos ofrece información ya calculada anteriormente para las variables `species`, `island`, `sex` y `year`. Vamos a analizar un poco más los datos recogidos en la tabla superior. 
+Primero de todo, vamos a definir cada variable que hemos calculado: `mean` la media, `sd` la desviación típica, `median` la mediana, `trimmed` la media recortada, `min` el mínimo, `max` el máximo y `skew` el sesgo.
 
+Si comparamos la media recortada (`trimmed`) con la media general (`mean`), podemos descubrir cuando los outliers estan sesgando la media con valores extremos. Como podemos ver las medias de las variables son muy próximas numéricamente a la media recortada cosa que nos indica que tenemos pocos o ningún outier en estas variables. Además, en comparación a sus respectivas medianas, también observamos que la distacia ente ellas es mínima.
 
-
-> > > > > > > fafaaced80dd78c770246be002389718e3bf0bc4
+Por otro lado, la variable `skew`(sesgo) nos ayuda a ver cuanto sesguegan la media los outliers que pudieran haber. Por tanto, notemos que todos los valores son menores a 1, cosa que nos hacer reafirmar la inexistencia de outliers en las variables `bill_length_mm`, `bill_depth_mm`,`flipper_length_mm`, `body_mass_g`.
