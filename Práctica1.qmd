@@ -7,9 +7,6 @@ editor: visual
 len: spanish
 ---
 
-FALTA POR HACER
-- ver que nº es el/la pingüino con los max i los min (marcado como título)
-
 Primero instalamos el paquete `palmerpenguins` y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente:
 
 ```{r, warning=FALSE, echo = FALSE}
@@ -99,6 +96,44 @@ aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~
 
 Como podemos observar, la especie *Chinstrap* es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie *Gentoo* tiene las aletas más largas que las otras dos especies que están bastante cerca en realción a la media. Y, por último, la especie *Gentoo* tiene el peso medio considerablemente más alto que las demás que son bastante próximas numéricamente.
 
+
+Además nos interesa ver cuales son los valores máximos y minimos de cada una de las variables en función de su especie:
+
+
+```{r, echo=FALSE}
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species, 
+          data=pinguinos, FUN=max)
+```
+Observamos que los pinguinos que presentan los valores máximos de peso corporal, longitud del pico y del ala son todos de la especie *Gentoo*, notemos que en el caso de la masa corporal la diferencia es significativa en cuanto al resto de especies, mientras que en el grosor del pico el valor máximo viene dado por la especie *Chinstrap*. Notemos que el valor máximo del grosor del pico de la especie *Gentoo*, és menor que los valores máximos de las especies *Chinstrap* y *Adelie*.
+
+Veamos que ocurre con los valores mínimos:
+
+```{r, echo=FALSE}
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species, 
+          data=pinguinos, FUN=min)
+```
+En este caso, los pinguinos *Adelie*, son los que presentan los valores mínimos tanto de la longitud del pico como la del ala; mientras que en cuanto al grosor del pico nos encontramos con un individuo de especie *Gentoo*, dato curioso, ya que hemos visto anteriormente que esta especie és la que presenta el valor máximo más pequeño de entre todas las especies. En cuanto al peso corporal,* Adelie* es la especie que presenta el valor mínimo.
+
+
+Para finalizar este estudio por especies, resumiermos todo lo anterior en los siguientes gráficos:
+
+```{r, echo=FALSE}
+par(mfrow=c(2,2))
+boxplot(pinguinos$bill_depth_mm ~ pinguinos$species, xlab = "Especie",  ylab = "Grosor del pico", )
+boxplot(pinguinos$bill_length_mm ~ pinguinos$species, xlab = "Especie", ylab = "Longitud del pico")
+boxplot(pinguinos$flipper_length_mm ~ pinguinos$species,xlab = "Especie", ylab = "Longitud del ala")
+boxplot(pinguinos$body_mass_g ~ pinguinos$species, xlab = "Especie", ylab = "Masa corporal")
+
+
+
+```
+
+
+
+
+
+
+
 Ahora vamos a estudiar cada especie por separado. Empezaremos estudiando la especie *Adelie*, que es la más abundante. Vamos a mostrar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.
 
 ```{r, echo=FALSE}
@@ -110,6 +145,11 @@ aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~
 Podemos observar que las medias de la largaria y anchura del pico son próximas numéricamente. En cambio, las aletas de los pingüinos *Adelie* de la isla *Torgersen* son un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no notamos diferencias significativas entre el peso de los pingüinos *Adelie* en referencia a habitar una isla u otra.
 
 Notemos que con las especies *Chinstrap* y *Gentoo* no podemos hacer el estudio de las diferentes islas ya que sólo habitan una: la especie *Chinstrap* habita en *Dream* y la *Gentoo* en *Biscoe*.
+
+
+
+Además, nos encontramos con varios puntos atípicos u outliers. 
+
 
 
 ## Estudio por sexo
@@ -138,7 +178,7 @@ Lo mismo pasa con los valores mínimos, que los mostramos a continuación:
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
           data=pinguinos, FUN=min)
 ```
-####VER QUE Nº ES EL/LA PINGÜINO CON LOS MAX I LOS MIN
+
 
 ## Estudio por año de registro
 
