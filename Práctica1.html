@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -18,72 +18,9 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -142,6 +79,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<p>Hola cucas, a ver en principio esta echo, lo que me he hecho un poco la picha un lio con el tema de los nombres de los data frames, os hago un resumen, y si se os ocurren nombre mejores (que es lo más probable, pq los mios resultan traumáticos) me decis y los cambio. Un besote xoxos.</p>
+<p>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! pinguinos ### data frame original pinguinos_sin_filas_NA_por_todo ### data frame sin las dos filas que tinen NA por todo —–&gt; i.e fila 4 y 272 ;) pinguinos_sin_NA ### data frame sin ningun NA —–&gt; i.e le he aplicado la función na.omit() ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡</p>
 <p>Aquí dejamos la dirección de nuestro repositorio Github: https://github.com/MargalidaVerd/Practica1.git</p>
 <p>Primero instalamos el paquete <code>palmerpenguins</code> y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente:</p>
 <div class="cell">
@@ -178,8 +117,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>Observemos que la variable <code>year</code> es considerada un número pero no nos aporta información numérica sino que es más un factor a tener en cuenta como dato y no como número. Así pues, vamos a considerarla un factor:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>penguins<span class="sc">$</span>year <span class="ot">=</span> <span class="fu">as.factor</span>(penguins<span class="sc">$</span>year)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
  $ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
@@ -195,11 +132,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo <em>factor</em>: <code>species</code>, que puede tomar tres valores (“Adelie”, “Chinstrap”, “Gentoo”); la variable <code>island</code>, que asigna la isla de procedencia de cada individuo y toma tres valores también, que son “Biscoe”, “Dream” y “Torgersen”; finalmente los niveles de la variable <code>sex</code> son “female” y “male”, y <code>year</code>, que se atribuye al año de estudio de cada pingüino (2007, 2008 o 2009).</p>
 <p>También encontramos dos variables del tipo <em>numérico</em>, que son <code>bill_length_mm</code>, que corresponde a la longitud del pico de cada pingüino, en milímetros, y <code>bill_depth_mm</code>, que corresponde al grosor del pico, también en milímetros.</p>
 <p>Finalmente, tenemos tres últimas variables de tipo <em>integer</em>: <code>flipper_length_mm</code>, que corresponde a la longitud de las aletas de cada pingüino, en milímetros, y <code>body_mass_g</code>, que recoge la masa corporal en gramos de cada individuo.</p>
-<p>Observamos también que hay valores NA y, por lo tanto vamos a eliminar los sujetos que presenten estos valores ya que no nos interesa trabajar con sujetos que no tienen la información completa (si los dejamos el estudio podría salir con errores). Guardamos el nuevo dataframe porque trabajaremos con él a partir de ahora.</p>
+<p>Observamos también que hay valores NA, sin embargo, solo descartaremos a dichos sujetos en el caso en que esto nos afecte al estudio de los datos. Veamos pues, cuales son las muestras que contienen algun valor NA:</p>
 <div class="cell">
-
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 11 × 8
+   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;              &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torgersen           NA            NA                  NA          NA
+ 2 Adelie  Torgersen           34.1          18.1               193        3475
+ 3 Adelie  Torgersen           42            20.2               190        4250
+ 4 Adelie  Torgersen           37.8          17.1               186        3300
+ 5 Adelie  Torgersen           37.8          17.3               180        3700
+ 6 Adelie  Dream               37.5          18.9               179        2975
+ 7 Gentoo  Biscoe              44.5          14.3               216        4100
+ 8 Gentoo  Biscoe              46.2          14.4               214        4650
+ 9 Gentoo  Biscoe              47.3          13.8               216        4725
+10 Gentoo  Biscoe              44.5          15.7               217        4875
+11 Gentoo  Biscoe              NA            NA                  NA          NA
+# ℹ 2 more variables: sex &lt;fct&gt;, year &lt;fct&gt;</code></pre>
 </div>
-<p>Una vez hemos limpiado los datos, empezamos con el análisis descriptivo.</p>
+</div>
+<p>Observamos que tenemos dos pinguinos de los que tan sólo sabemos la isla y el año en que se les fué tomada la muestra. Sin embargo, de el resto de pinguinos, los valores NA vienen asociados a la variable sexo. Por lo tanto, a la hora de descartar dichas muestras , lo haremos en función de la variable que estemos estudiando.</p>
+<p>Así pues, trabajaremos con el data frame original siempre que no indiquemos lo contrario.</p>
 <section id="datos-demográficos" class="level2">
 <h2 class="anchored" data-anchor-id="datos-demográficos">Datos demográficos</h2>
 <p>Primero de todo, vamos a hacer un análisis de los datos básicos de la muestra, para familiarizarnos con ellos y poder estudiarlos con detalle más adelante. Empecemos por las especies de pingüinos. Recordemos que hay tres:</p>
@@ -213,7 +167,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>
    Adelie Chinstrap    Gentoo 
-      146        68       119 </code></pre>
+      152        68       124 </code></pre>
 </div>
 </div>
 <p>Con cierta diferencia, la especie más poblada es la <em>Adelie</em>, seguida de <em>Gentoo</em> y, finalmente, <em>Chinstrap</em>.</p>
@@ -222,14 +176,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>
    Biscoe     Dream Torgersen 
-      163       123        47 </code></pre>
+      168       124        52 </code></pre>
 </div>
 </div>
 <p>Como podemos ver, la isla más poblada es la de <em>Biscoe</em>, seguida de <em>Dream</em> y, por último, ya más alejada en cuanto a valores, la isla <em>Torgersen</em>.</p>
 <p>Analicemos ahora la población de cada isla por especies; es decir, nos interesa ilustrar la cantidad de pingüinos de cada especie en cada isla. En el siguiente gráfico vemos como la especie <em>Adelie</em> se haya en las tres islas, mientras que las otras dos solo en una de ellas.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Práctica1_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+<p><img src="Práctica1_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Un dato también a tener en cuenta en nuestro AED es el año de estudio de los individuos. Visualicemos el recuento:</p>
@@ -237,29 +191,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>
 2007 2008 2009 
- 103  113  117 </code></pre>
+ 110  114  120 </code></pre>
 </div>
 </div>
 <p>El tamaño de las muestras de cada año no fluctua significativamente.</p>
-<p>Finalmente, veamos el sexo de los individuos de la muestra:</p>
+<p>Finalmente, veamos el sexo de los individuos de la muestra. Observamos, que ahora si que debemos tener en cuenta los valores NA, por lo tanto, ahora trabajaremos con el data frame que omite todas las filas que contienen algun valor NA.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>
-female   male 
-   165    168 </code></pre>
+<pre><code>tibble [333 × 8] (S3: tbl_df/tbl/data.frame)
+ $ species          : Factor w/ 3 levels "Adelie","Chinstrap",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ island           : Factor w/ 3 levels "Biscoe","Dream",..: 3 3 3 3 3 3 3 3 3 3 ...
+ $ bill_length_mm   : num [1:333] 39.1 39.5 40.3 36.7 39.3 38.9 39.2 41.1 38.6 34.6 ...
+ $ bill_depth_mm    : num [1:333] 18.7 17.4 18 19.3 20.6 17.8 19.6 17.6 21.2 21.1 ...
+ $ flipper_length_mm: int [1:333] 181 186 195 193 190 181 195 182 191 198 ...
+ $ body_mass_g      : int [1:333] 3750 3800 3250 3450 3650 3625 4675 3200 3800 4400 ...
+ $ sex              : Factor w/ 2 levels "female","male": 2 1 1 1 2 1 2 1 2 2 ...
+ $ year             : Factor w/ 3 levels "2007","2008",..: 1 1 1 1 1 1 1 1 1 1 ...
+ - attr(*, "na.action")= 'omit' Named int [1:11] 4 9 10 11 12 48 179 219 257 269 ...
+  ..- attr(*, "names")= chr [1:11] "4" "9" "10" "11" ...</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt; table of extent 0 &gt;</code></pre>
 </div>
 </div>
 <p>No notamos mucha diferencia entre machos y hembras, por lo que se podrá estudiar más adelante si existen diferencias en las características de los pingüinos en función del sexo cromosómico de estos.</p>
 </section>
 <section id="estudio-por-especie" class="level2">
 <h2 class="anchored" data-anchor-id="estudio-por-especie">Estudio por especie</h2>
-<p>Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función <code>aggregate()</code>, donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe.</p>
+<p>Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función <code>aggregate()</code>, donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe. Observamos que ahora si que nos afectan las dos muestras que presentan valores NA en todas las variables, por lo tanto, trabajaremos con el data frame que omite a estos dos sujetos.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>    species bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-1    Adelie       38.82397      18.34726          190.1027    3706.164
+1    Adelie       38.79139      18.34636          189.9536    3700.662
 2 Chinstrap       48.83382      18.42059          195.8235    3733.088
-3    Gentoo       47.56807      14.99664          217.2353    5092.437</code></pre>
+3    Gentoo       47.50488      14.98211          217.1870    5076.016</code></pre>
 </div>
 </div>
 <p>Como podemos observar, la especie <em>Chinstrap</em> es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie <em>Gentoo</em> tiene las aletas más largas que las otras dos especies que están bastante cerca en realción a la media. Y, por último, la especie <em>Gentoo</em> tiene el peso medio considerablemente más alto que las demás que son bastante próximas numéricamente.</p>
@@ -286,16 +251,16 @@ female   male
 <p>Para finalizar este estudio por especies, resumiermos todo lo anterior en los siguientes gráficos:</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="Práctica1_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="Práctica1_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Ahora vamos a estudiar cada especie por separado. Empezaremos estudiando la especie <em>Adelie</em>, que es la más abundante. Vamos a mostrar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>     island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-1    Biscoe        38.9750      18.37045          188.7955    3709.659
-2     Dream        38.5200      18.24000          189.9273    3701.364
-3 Torgersen        39.0383      18.45106          191.5319    3708.511</code></pre>
+1    Biscoe       39.13333      18.25556          189.2889    3727.222
+2     Dream       38.50179      18.25179          189.7321    3688.393
+3 Torgersen       38.95098      18.42941          191.1961    3706.373</code></pre>
 </div>
 </div>
 <p>Podemos observar que las medias de la largaria y anchura del pico son próximas numéricamente. En cambio, las aletas de los pingüinos <em>Adelie</em> de la isla <em>Torgersen</em> son un poco más largas que las de las otras islas. Sobre el peso podemos decir que las medias son bastante cercanas, así que no notamos diferencias significativas entre el peso de los pingüinos <em>Adelie</em> en referencia a habitar una isla u otra.</p>
@@ -303,6 +268,7 @@ female   male
 </section>
 <section id="estudio-por-sexo" class="level2">
 <h2 class="anchored" data-anchor-id="estudio-por-sexo">Estudio por sexo</h2>
+<p>De nuevo, usaremos el data frame que no contiene ningún valor NA, ya que éste afecta de forma directa al análisis en cuestión.</p>
 <p>En esta sección, analizaremos las posibles diferencias entre sexos. Veámoslo de forma sencilla:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -336,9 +302,9 @@ female   male
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>  year bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-1 2007       44.01942      17.41456          197.2427    4153.155
-2 2008       43.51770      16.93628          202.6991    4263.274
-3 2009       44.42821      17.16581          202.5726    4200.214</code></pre>
+1 2007       43.74037      17.42752          196.8807    4124.541
+2 2008       43.54123      16.91404          202.7982    4266.667
+3 2009       44.45294      17.12521          202.8067    4210.294</code></pre>
 </div>
 </div>
 <p>La variación que más destaca es la media de la longitud de las aletas entre el 2007 y el 2008. Así mismo, en estos mismos años, la masa corporal de los pingüinos aumentó 110 gramos con respecto el año anterior.</p>
@@ -417,9 +383,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -484,6 +464,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
