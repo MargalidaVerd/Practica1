@@ -7,18 +7,6 @@ editor: visual
 len: spanish
 ---
 
-Hola cucas, a ver en principio esta echo, lo que me he hecho un poco la picha un lio con el tema de los nombres de los data frames, os hago un resumen, y si se os ocurren nombre mejores (que es lo más probable, pq los mios resultan traumáticos) me decis y los cambio. Un besote xoxos.
-
-
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-pinguinos ### data frame original
-pinguinos_sin_filas_NA_por_todo ### data frame sin las dos filas que tinen NA por todo -----> i.e fila 4 y 272 ;) 
-pinguinos_sin_NA ### data frame sin ningun NA -----> i.e le he aplicado la función na.omit()
-¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡
-
-
-
-
 Aquí dejamos la dirección de nuestro repositorio Github: https://github.com/MargalidaVerd/Practica1.git
 
 Primero instalamos el paquete `palmerpenguins` y mostramos por pantalla las primeras filas para asegurarnos que se ha cargado correctamente:
@@ -27,20 +15,19 @@ Primero instalamos el paquete `palmerpenguins` y mostramos por pantalla las prim
 #install.packages("palmerpenguins")
 library("palmerpenguins")
 head(penguins,10)
-pinguinos=penguins #le cambiamos el nombre al data frame
 ```
 
 Veamos su estructura:
 
 ```{r, echo = FALSE}
-str(pinguinos)
+str(penguins)
 ```
 
 Observemos que la variable `year` es considerada un número pero no nos aporta información numérica sino que es más un factor a tener en cuenta como dato y no como número. Así pues, vamos a considerarla un factor:
 
 ```{r, echo=FALSE}
-pinguinos$year = as.factor(pinguinos$year)
-str(pinguinos)
+penguins$year = as.factor(penguins$year)
+str(penguins)
 ```
 
 Como podemos observar, el tamaño de la muestra realizada es de 344 pingüinos, de los que se han tomado datos de 8 variables diferentes. Entre estas encontramos tres variables de tipo *factor*: `species`, que puede tomar tres valores ("Adelie", "Chinstrap", "Gentoo"); la variable `island`, que asigna la isla de procedencia de cada individuo y toma tres valores también, que son "Biscoe", "Dream" y "Torgersen"; finalmente los niveles de la variable `sex` son "female" y "male", y `year`, que se atribuye al año de estudio de cada pingüino (2007, 2008 o 2009).
@@ -49,17 +36,14 @@ También encontramos dos variables del tipo *numérico*, que son `bill_length_mm
 
 Finalmente, tenemos tres últimas variables de tipo *integer*: `flipper_length_mm`, que corresponde a la longitud de las aletas de cada pingüino, en milímetros, y `body_mass_g`, que recoge la masa corporal en gramos de cada individuo.
 
-
-Observamos también que hay valores NA, sin embargo, solo descartaremos a dichos sujetos en el caso en que esto nos afecte al estudio de los datos. Veamos pues, cuales son las muestras que contienen algun valor NA:
-
-```{r, echo=FALSE}
-filas_con_na <- which(apply(pinguinos, 1, function(row) any(is.na(row))))
-```
+Observamos también que hay valores NA, sin embargo, solo descartaremos a dichos sujetos en el caso en que esto nos afecte al estudio de los datos. Veamos pues, cuáles son las muestras que contienen algún valor NA:
 
 ```{r, echo=FALSE}
-pinguinos[filas_con_na, ] 
+filas_con_NA <- which(apply(penguins, 1, function(row) any(is.na(row))))
+penguins[filas_con_NA, ] 
 ```
-Observamos que tenemos dos pinguinos de los que tan sólo sabemos la isla y el año en que se les fué tomada la muestra. Sin embargo, de el resto de pinguinos, los valores NA vienen asociados a la variable sexo. Por lo tanto, a la hora de descartar dichas muestras , lo haremos en función de la variable que estemos estudiando.
+
+Observamos que tenemos dos pingüinos de los que tan sólo sabemos la isla y el año en que se les fué tomada la muestra. Sin embargo, del resto de pingüinos, los valores NA vienen asociados a la variable sexo. Por lo tanto, a la hora de descartar dichas muestras, lo haremos en función de la variable que estemos estudiando.
 
 Así pues, trabajaremos con el data frame original siempre que no indiquemos lo contrario.
 
@@ -76,7 +60,7 @@ Primero de todo, vamos a hacer un análisis de los datos básicos de la muestra,
 Veamos sus frecuencias relativas:
 
 ```{r, echo=FALSE}
-table(pinguinos$species)
+table(penguins$species)
 ```
 
 Con cierta diferencia, la especie más poblada es la *Adelie*, seguida de *Gentoo* y, finalmente, *Chinstrap*.
@@ -84,16 +68,16 @@ Con cierta diferencia, la especie más poblada es la *Adelie*, seguida de *Gento
 También es interesante estudiar la población por islas. A continuación lo vemos:
 
 ```{r, echo = FALSE}
-table(pinguinos$island)
+table(penguins$island)
 ```
 
 Como podemos ver, la isla más poblada es la de *Biscoe*, seguida de *Dream* y, por último, ya más alejada en cuanto a valores, la isla *Torgersen*.
 
-Analicemos ahora la población de cada isla por especies; es decir, nos interesa ilustrar la cantidad de pingüinos de cada especie en cada isla. En el siguiente gráfico vemos como la especie *Adelie* se haya en las tres islas, mientras que las otras dos solo en una de ellas.
+Analicemos ahora la población de cada isla por especies; es decir, nos interesa ilustrar la cantidad de pingüinos de cada especie en cada isla. En el siguiente gráfico vemos como la especie *Adelie* se haya en las tres islas, mientras que las otras dos sólo en una de ellas.
 
 ```{r, echo=FALSE, warning=FALSE}
 library(ggplot2)
-data2= pinguinos[, c(1,2)]
+data2= penguins[, c(1,2)]
 ggplot(data2, aes(island, fill = species)) +
   geom_bar() + guides(fill= guide_legend(title = ""))
 ```
@@ -101,7 +85,7 @@ ggplot(data2, aes(island, fill = species)) +
 Un dato también a tener en cuenta en nuestro AED es el año de estudio de los individuos. Visualicemos el recuento:
 
 ```{r, echo=FALSE}
-table(pinguinos$year)
+table(penguins$year)
 ```
 
 El tamaño de las muestras de cada año no fluctua significativamente.
@@ -109,11 +93,7 @@ El tamaño de las muestras de cada año no fluctua significativamente.
 Finalmente, veamos el sexo de los individuos de la muestra. Observamos, que ahora si que debemos tener en cuenta los valores NA, por lo tanto, ahora trabajaremos con el data frame que omite todas las filas que contienen algun valor NA.
 
 ```{r, echo=FALSE}
-pinguinos_sin_NA= na.omit(pinguinos)
-```
-
-
-```{r, echo=FALSE}
+pinguinos_sin_NA= na.omit(penguins)
 table(str(pinguinos_sin_NA)$sex)
 ```
 
@@ -124,31 +104,30 @@ No notamos mucha diferencia entre machos y hembras, por lo que se podrá estudia
 Vamos a analizar las diferentes característcas de cada especie. En primer lugar, estudiaremos la media de las caracerísticas de los pingüinos. Lo haremos con la función `aggregate()`, donde definiremos las características como vector y lo relacionaremos con las diferentes especies de nuestro dataframe. Observamos que ahora si que nos afectan las dos muestras que presentan valores NA en todas las variables, por lo tanto, trabajaremos con el data frame que omite a estos dos sujetos.
 
 ```{r, echo=FALSE}
-pinguinos_sin_filas_NA_por_todo = pinguinos[-c(4,272), ]
+pinguinos = penguins[-c(4,272), ]
 ```
 
-
 ```{r, echo=FALSE}
-aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species, 
-          data=pinguinos_sin_filas_NA_por_todo, FUN=mean)
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species,
+          data=pinguinos, FUN=mean)
 ```
 
 Como podemos observar, la especie *Chinstrap* es la que tiene el pico más largo y ancho en comparación a las medias de las otras dos especies. En cambio, la especie *Gentoo* tiene las aletas más largas que las otras dos especies que están bastante cerca en realción a la media. Y, por último, la especie *Gentoo* tiene el peso medio considerablemente más alto que las demás que son bastante próximas numéricamente.
 
-Además nos interesa ver cuales son los valores máximos y minimos de cada una de las variables en función de su especie:
+Además nos interesa ver cuáles son los valores máximos y mínimos de cada una de las variables en función de su especie:
 
 ```{r, echo=FALSE}
-aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species, 
-          data=pinguinos_sin_filas_NA_por_todo, FUN=max)
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species,
+          data=pinguinos, FUN=max)
 ```
 
-Observamos que los pinguinos que presentan los valores máximos de peso corporal, longitud del pico y del ala son todos de la especie *Gentoo*, notemos que en el caso de la masa corporal la diferencia es significativa en cuanto al resto de especies, mientras que en el grosor del pico el valor máximo viene dado por la especie *Chinstrap*. Notemos que el valor máximo del grosor del pico de la especie *Gentoo*, es menor que los valores máximos de las especies *Chinstrap* y *Adelie*.
+Observamos que los pingüinos que presentan los valores máximos de peso corporal, longitud del pico y del ala son todos de la especie *Gentoo*, notemos que en el caso de la masa corporal la diferencia es significativa en cuanto al resto de especies, mientras que en el grosor del pico el valor máximo viene dado por la especie *Chinstrap*. Notemos que el valor máximo del grosor del pico de la especie *Gentoo*, es menor que los valores máximos de las especies *Chinstrap* y *Adelie*.
 
 Veamos que ocurre con los valores mínimos:
 
 ```{r, echo=FALSE}
-aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species, 
-          data=pinguinos_sin_filas_NA_por_todo, FUN=min)
+aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~species,
+          data=pinguinos, FUN=min)
 ```
 
 En este caso, los pinguinos *Adelie*, son los que presentan los valores mínimos tanto de la longitud del pico como la del ala; mientras que en cuanto al grosor del pico nos encontramos con un individuo de especie *Gentoo*, dato curioso, ya que hemos visto anteriormente que esta especie es la que presenta el valor máximo más pequeño de entre todas las especies. En cuanto al peso corporal, *Chinstrap* es la especie que presenta el valor mínimo.
@@ -157,16 +136,16 @@ Para finalizar este estudio por especies, resumiermos todo lo anterior en los si
 
 ```{r, echo=FALSE}
 par(mfrow=c(2,2))
-boxplot(pinguinos_sin_filas_NA_por_todo$bill_depth_mm ~ pinguinos_sin_filas_NA_por_todo$species, xlab = "Especie",  ylab = "Grosor del pico", )
-boxplot(pinguinos_sin_filas_NA_por_todo$bill_length_mm ~ pinguinos_sin_filas_NA_por_todo$species, xlab = "Especie", ylab = "Longitud del pico")
-boxplot(pinguinos_sin_filas_NA_por_todo$flipper_length_mm ~ pinguinos_sin_filas_NA_por_todo$species,xlab = "Especie", ylab = "Longitud del ala")
-boxplot(pinguinos_sin_filas_NA_por_todo$body_mass_g ~ pinguinos_sin_filas_NA_por_todo$species, xlab = "Especie", ylab = "Masa corporal")
+boxplot(pinguinos$bill_depth_mm ~ pinguinos$species, xlab = "Especie",  ylab = "Grosor del pico", )
+boxplot(pinguinos$bill_length_mm ~ pinguinos$species, xlab = "Especie", ylab = "Longitud del pico")
+boxplot(pinguinos$flipper_length_mm ~ pinguinos$species,xlab = "Especie", ylab = "Longitud del ala")
+boxplot(pinguinos$body_mass_g ~ pinguinos$species, xlab = "Especie", ylab = "Masa corporal")
 ```
 
 Ahora vamos a estudiar cada especie por separado. Empezaremos estudiando la especie *Adelie*, que es la más abundante. Vamos a mostrar la media de sus características en relación a la isla que habitan para ver si hay diferencias significativas entre habitar una isla u otra.
 
 ```{r, echo=FALSE}
-adelie = pinguinos_sin_filas_NA_por_todo[which(pinguinos$species == "Adelie"),]
+adelie = pinguinos[which(pinguinos$species == "Adelie"),]
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~island,
           data=adelie, FUN=mean)
 ```
@@ -176,9 +155,10 @@ Podemos observar que las medias de la largaria y anchura del pico son próximas 
 Notemos que con las especies *Chinstrap* y *Gentoo* no podemos hacer el estudio de las diferentes islas ya que sólo habitan una: la especie *Chinstrap* habita en *Dream* y la *Gentoo* en *Biscoe*.
 
 ## Estudio por sexo
-De nuevo, usaremos el data frame que no contiene ningún valor NA, ya que éste afecta de forma directa al análisis en cuestión. 
 
-En esta sección, analizaremos las posibles diferencias entre sexos. Veámoslo de forma sencilla: 
+En este caso, usaremos el data frame que no contiene ningún valor NA, ya que éste afecta de forma directa al análisis en cuestión.
+
+En esta sección, analizaremos las posibles diferencias entre sexos. Veámoslo de forma sencilla:
 
 ```{r, echo= FALSE}
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
@@ -194,30 +174,29 @@ aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~
           data=pinguinos_sin_NA, FUN= max)
 ```
 
-La diferencia más significativa vuelve a ser la de la masa corporal, que difiere en casi 1000 gramos (1kg).
+La diferencia más significativa vuelve a ser la de la masa corporal, que difiere en 900 gramos.
 
 Lo mismo pasa con los valores mínimos, que los mostramos a continuación:
 
 ```{r, echo=FALSE}
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~sex,
-          data=pinguinos_sin_NA, FUN=min)
+          data=pinguinos, FUN=min)
 ```
 
 ## Estudio por año de registro
 
-
-Como hemos visto antes, cada año se tomaron datos de, aproximadamente 100 pingüinos. En esta sección analizamos con detalle si existen diferencias en función del año de estudio. Empecemos con las medias, como hemos hecho ya en las dos secciones anteriores:
+Como hemos visto antes, cada año se tomaron datos de, aproximadamente, 100 pingüinos. En esta sección analizamos con detalle si existen diferencias en función del año de estudio. Empecemos con las medias, como hemos hecho ya en las dos secciones anteriores:
 
 ```{r, echo = FALSE}
 aggregate(cbind(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g )~year,
-          data=pinguinos_sin_filas_NA_por_todo, FUN=mean)
+          data=pinguinos, FUN=mean)
 ```
 
 La variación que más destaca es la media de la longitud de las aletas entre el 2007 y el 2008. Así mismo, en estos mismos años, la masa corporal de los pingüinos aumentó 110 gramos con respecto el año anterior.
 
 ## Conclusión
 
-Vamos a ver de manera resumida los datos recogidos anteriormente:
+Vamos a ver de manera resumida los datos recogidos anteriormente con el data frame sin considerar los pingïnos que tienen algún NA en sus datos:
 
 ```{r, echo=FALSE}
 summary(pinguinos_sin_NA)
